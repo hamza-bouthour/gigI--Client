@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import bandsUrl from '../config';
 
 const ArtistForm = props => {
     const [btnColor, setBtnColor] = useState('yellowgreen');
@@ -11,10 +12,32 @@ const ArtistForm = props => {
 
    function handleClick() {
         btnColor === 'red'? setBtnColor('blue') : setBtnColor('red')
-        console.log(bandName, bandStyle, bandLineUp, bandZipCode, bandSoundSystem)
+        // console.log(bandName, bandStyle, bandLineUp, bandZipCode, bandSoundSystem)
+        const data = {
+            bandName,
+            bandStyle,
+            bandLineUp, 
+            bandZipCode,
+            bandSoundSystem
+        }
+        // {bandName, bandStyle, bandLineUp, bandZipCode, bandSoundSystem}
+        fetch(bandsUrl, {
+            method: 'POST', 
+            body: JSON.stringify(data),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+            })
+            // .then(response => response.json())
+            .then(response => {
+            console.log(response);
+            })
+            .catch((error) => {
+            console.error('Error:', error);
+        });
     }
     return (
-        <div>
+        <div style={{padding: 15,borderRadius: 5, backgroundColor: "green"}}>
             <Form className="band-form">
                 <FormGroup>
                     <Label htmlFor="bandNameInput">Your name</Label>

@@ -43,7 +43,8 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover; */
-  background-color: rgb(3, 30, 117) !important;
+  background-color: rgb(229, 238, 247) !important;
+  color:rgb(0, 0, 0);
 }
 /* HEADER styling */
 
@@ -55,7 +56,7 @@ body {
 .jumbotron-header {
   background-color: transparent !important;
   margin: 20px;
-  color: azure !important;
+  
 }
 
 
@@ -71,4 +72,12 @@ body {
   color: beige;
 }
 
+/* BAND list styling */
+
+.band-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  
+}
 

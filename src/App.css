@@ -43,23 +43,89 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover; */
-    background-color: #ffffff !important; 
-  color:rgb(250, 250, 250); 
+    background-color: rgb(28, 71, 71)
+    !important; 
+  color:rgb(250, 250, 250) !important; 
   /* background: rgb(2,0,36);
 background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%); */
 }
 /* HEADER styling */
+/* cvolord: 
+3b4e76 purple
+3b4e76
+039FB6 blue
+EE5407 orange
+darkslategray
+*/
+.btn-form-starter {
+  background-color:#c74403;
+  padding: 10px;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 2px 1px 13px 0px #000;
+  animation: myAnim 1s ease 0s 1 normal forwards;
+}
+.btn-form-starter:hover {
+  border: solid 1px white;
+  background-color: #a73801;
+}
+@keyframes myAnim {
+  0% {
+    opacity: 0;
+    transform: translateX(-250px);
+  }
 
-.navLinks {
-  margin-right: 15px;
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.absoluteLogo {
+  width: 220px;
+  
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+ 
 }
 
+.navLinks {
+  margin-right: 10px;
+  
+  color: aliceblue ;
+}
+.testes {
+  background-color:#c74403;
+  padding: 0px;
+}
 /* HOME styling */
 .jumbotron-header {
   background-color: transparent !important;
   margin: 20px;
   
 }
+.btn-account-box {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  right: 28px;
+  top: 14px;
+}
+.btn-accounts {
+ 
+  color: #fff;
+}
+.btn-accounts:hover {
+  text-decoration: underline;
+  color: #fff !important;
+}
+/* .band-style {
+
+} */
 
 
 /* BAND form styling */
@@ -67,11 +133,63 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(
   display: flex;
   flex-direction: row;
   justify-content: center;
-  
+  padding: 15px;
+
+}
+.flex-row-start {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+/* cvolord: 
+3b4e76 purple
+3b4e76
+039FB6 blue
+EE5407 orange
+darkslategray
+*/
+.instrument-box {
+  text-align: center;
+  min-width: 70px;
+ 
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  background-color: #039FB6;
+  margin-right: 5px;
+  padding: 4px;
+  border-radius: 8px;
+  color: #fff;
+}
+.style-box {
+  text-align: center;
+  min-width: 50px;
+  margin: auto;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  background-color: #af4008;
+  margin-right: 5px;
+  padding: 4px;
+  border-radius: 8px;
+  color: #fff;
 }
 .band-form {
-  min-width: 500px;
+
   color: beige;
+  padding: 15px; 
+  border-radius: 5;
+  background-color: rgb(12, 61, 61) !important;
+  animation: myAnim 1s ease 0s 1 normal forwards;
+}
+@keyframes myAnim {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 
 /* BAND list styling */
@@ -83,7 +201,43 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(
   justify-content: center;
   
 }
+.band-box {
+  /* border: solid 1px rgb(37, 118, 121); */
+  color: #fff;
+  border-radius: 5px;
+  position: relative;
+  animation: myAnim 2s ease 0s 1 normal forwards;
+  transition: outline 1s ease 0s;
+}
+@keyframes myAnim {
+  0% {
+    opacity: 0;
+    transform: translateX(-250px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
 .band-info-box {
   line-height: 5px;
+}
+.btn-band-box {
+  background-color: rgb(28, 71, 71);
+  border: none;
+  margin-right: 15px;
+  min-width: 80px;
+  color: white;
+  border: solid 2px teal;
+  border-radius: 15px;
+  padding: 5px;
+}
+.btn-band-box:hover {
+  background-color: #039FB6;
+}
+.band-box:hover {
+  border: solid 1px rgb(2, 234, 241);
+
 }
 

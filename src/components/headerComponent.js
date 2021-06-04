@@ -3,21 +3,32 @@ import { Nav, Navbar, NavbarBrand, NavbarToggler, Collapse, NavItem, Jumbotron} 
 import { NavLink, Link } from 'react-router-dom';
 
 const Header = (props) => {
-
+    const dis = window.innerWidth;
     const [isOpen, setIsOpen] = useState(false);
+    const [accountBtnDisplay, setAccountBtnDisplay] = useState('flex');
     const toggleNav = () => setIsOpen(!isOpen);
+    React.useEffect(() => {
+        function handleResize() {
+          console.log('resized to: ', window.innerWidth, 'x', window.innerHeight)
+          window.innerWidth < 767 ? setAccountBtnDisplay('none') : setAccountBtnDisplay('flex')
+        
+    }
+    
+        window.addEventListener('resize', handleResize)
+      })
 
     return (
-        <div>
+        <div className="testes">
             <Navbar
-                color="light"
-                light
-                expand="md"
+                color="faded"
+                dark
+                expand="md"  
             >
                 <NavbarBrand
-                    href="/"
+                    href="/home"
+                    // style={{margin: "0px"}}
                 >
-                    GigIT
+                    GigIt
                 </NavbarBrand>
                 <NavbarToggler 
                     onClick={toggleNav} 
@@ -25,20 +36,41 @@ const Header = (props) => {
                 <Collapse
                     isOpen={isOpen}
                     navbar
+                    
                 >
-                    <Nav>
-                        <NavItem className='navLinks' style={{marginLeft: 20}}>
-                            <Link to='/home'>
+                    <Nav >
+                        <NavItem >
+                            <Link to='/home' className='navLinks '>
                                 Home
                             </Link>
                         </NavItem>
-                        <NavItem className='navLinks'>
-                            <Link to='/bands'>
+                        <NavItem>
+                            <Link to='/bands' className='navLinks'>
                                 Bands
                             </Link>
                         </NavItem>
+                        {/* <NavItem >
+                            <Link to='/bands' className='navLinks' style={{color: '#fff', position: 'absolute', right: '20px'}}>
+                                Bands
+                            </Link>
+                        </NavItem> */}
                     </Nav> 
                 </Collapse>
+                <img src="https://i.postimg.cc/XqjW0KSm/9e00586c13bf42fbbbdce9f2643a932a-1.png" className="absoluteLogo" />
+                <div className="btn-account-box" style={{display: window.innerWidth > 767 ? 'flex': 'none' || accountBtnDisplay}}>
+                    <Link to='/bands' className='btn-accounts' style={{marginRight: 15}}>
+                        My account
+                    </Link>
+                    <Link to='/bands' className='btn-accounts' style={{marginRight: 60}}>
+                        Recruiter
+                    </Link>
+                    <Link to='/bands' className='btn-accounts px-4 ' 
+                        style={{ marginRight: 0}}>
+                        Sign-up
+                    </Link>
+
+                </div>
+                
             </Navbar>
         </div>
     )

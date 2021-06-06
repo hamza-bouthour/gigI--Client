@@ -9,7 +9,6 @@ const Header = (props) => {
     const toggleNav = () => setIsOpen(!isOpen);
     React.useEffect(() => {
         function handleResize() {
-          console.log('resized to: ', window.innerWidth, 'x', window.innerHeight)
           window.innerWidth < 767 ? setAccountBtnDisplay('none') : setAccountBtnDisplay('flex')
         
     }
@@ -18,7 +17,7 @@ const Header = (props) => {
       })
 
     return (
-        <div className="testes">
+        <div className="nav-container">
             <Navbar
                 color="faded"
                 dark
@@ -58,15 +57,15 @@ const Header = (props) => {
                 </Collapse>
                 <img src="https://i.postimg.cc/XqjW0KSm/9e00586c13bf42fbbbdce9f2643a932a-1.png" className="absoluteLogo" />
                 <div className="btn-account-box" style={{display: window.innerWidth > 767 ? 'flex': 'none' || accountBtnDisplay}}>
-                    <Link to='/bands' className='btn-accounts' style={{marginRight: 15}}>
-                        My account
+                    <Link to='/bands' className='nav-btn' style={{marginRight: 15}}>
+                        Artist
                     </Link>
-                    <Link to='/bands' className='btn-accounts' style={{marginRight: 60}}>
+                    <Link to='/bands' className='nav-btn' style={{marginRight: 60}}>
                         Recruiter
                     </Link>
-                    <Link to='/bands' className='btn-accounts px-4 ' 
+                    <Link to='/login' className='nav-btn px-4 ' 
                         style={{ marginRight: 0}}>
-                        Sign-up
+                        Log-in
                     </Link>
 
                 </div>

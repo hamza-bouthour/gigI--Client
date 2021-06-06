@@ -3,7 +3,6 @@ import { Button, Form, FormGroup, Label, Input, FormText, Col, Row } from 'react
 import bandsUrl from '../config';
 
 const ArtistForm = props => {
-    const [btnColor, setBtnColor] = useState('#EE5407');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
@@ -16,7 +15,6 @@ const ArtistForm = props => {
     const [sound, setSound] = useState(true);
 
    function handleClick() {
-        btnColor === 'red'? setBtnColor('blue') : setBtnColor('red')
         const data = {
             email,
             password,
@@ -35,13 +33,13 @@ const ArtistForm = props => {
 }
 
     return (
-        <div style={{display: props.display}} className="band-form">
+        <div style={{display: props.displayBandForm}} className="band-form">
             <Form>
                 <Row form>
                     <Col md={6}>
                         <FormGroup>
                             <Label htmlFor="emailIn">Email</Label>
-                            <Input type="text" name="email" id="emailIn" 
+                            <Input type="text" name="email" id="emailIn" placeholder="band@gigit.com"
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                         </FormGroup>
@@ -63,14 +61,22 @@ const ArtistForm = props => {
                         />
                     </FormGroup>
                     <FormGroup>
-                        <Label htmlFor="styleIn" >Style</Label>
-                        <Input type="text" name="style" id="styleIn" placeholder="Rock, blues, metal..." 
-                            onChange={(e) => setStyle(e.target.value)}
-                        />
-                    </FormGroup>
+                            <Label htmlFor="eventRecruiterIn">Type of music</Label>
+                            <Input type="select" name="event" id="eventRecruiterIn" 
+                                onChange={(e) => setStyle(e.target.value)}
+                            >
+                            <option value="Rock">Rock</option>
+                            <option value="Blues">Blues</option>
+                            <option value="Latino music">Latino music</option>
+                            <option value="Country">Country</option>
+                            <option value="Rap">Rap</option>
+                            <option value="Reggae">Reggae</option>
+                            <option value="jazz">Jazz</option>
+                            </Input>
+                        </FormGroup>
                     <FormGroup>
                         <Label htmlFor="descIn" >Description</Label>
-                        <Input type="textarea" name="style" id="descIn" placeholder="Rock, blues, metal..." 
+                        <Input type="textarea" name="style" id="descIn" placeholder="An introduction to your band" 
                             onChange={(e) => setDescription(e.target.value)}
                         />
                     </FormGroup>
@@ -102,7 +108,7 @@ const ArtistForm = props => {
                     <Col md={4}>
                         <FormGroup>
                             <Label htmlFor="countryIn" >Country</Label>
-                            <Input type="text" name="style" id="countryIn" placeholder="Rock, blues, metal..." 
+                            <Input type="text" name="style" id="countryIn" placeholder="USA" 
                                 onChange={(e) => setCountry(e.target.value)}
                             />
                         </FormGroup>
@@ -110,7 +116,7 @@ const ArtistForm = props => {
                     <Col md={4}>
                         <FormGroup>
                             <Label htmlFor="cityIn" >City</Label>
-                            <Input type="text" name="style" id="cityIn" placeholder="Rock, blues, metal..." 
+                            <Input type="text" name="style" id="cityIn" placeholder="San Fransisco" 
                                 onChange={(e) => setCity(e.target.value)}
                             />
                         </FormGroup>
@@ -126,7 +132,7 @@ const ArtistForm = props => {
                 </Row>
                     <Button 
                         id="namdFormSubmit-btn"
-                        style={{backgroundColor: btnColor}}
+                        className="form-submit-btn"
                         onClick={() => handleClick()}
                     >
                         Submit

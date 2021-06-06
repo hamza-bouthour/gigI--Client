@@ -1,4 +1,4 @@
-import './App.css';
+import '../src/css/App.scss';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Main from './components/mainComponent';
 import { Provider } from 'react-redux';

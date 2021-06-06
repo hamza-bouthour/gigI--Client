@@ -89,27 +89,27 @@ const BandBox = props => {
                     <div className="ml-4 text-align ">
                         <div className="row mb-4">
                             <h2 className="col-6 col-md-4">{band.name.toUpperCase()}</h2>
-                            <div className="col-md-2 col-12 flex-row-start offset-lg-6 ">
+                            <div className="col-md-2 col-12 band-style-container offset-lg-6 ">
                                 {band.style.map(st => {
                                 return (
-                                    <div className="style-box">{st}</div>
+                                    <div className="band-style-box">{st}</div>
                                 )
                                 })}
                             </div>
 
                         </div>
                         <p>{band.description}</p>
-                        <div className="flex-row-start" style={{marginBottom: 5, marginTop: 15}}>
+                        <div className="instruments-container" style={{marginBottom: 5, marginTop: 15}}>
                             {band.instruments.map(st => {
                                 return (
-                                    <div className="instrument-box ">{st}</div>
+                                    <div className="band-instrument-box">{st}</div>
                                 )
                             })}
-                            <div style={{minWidth: "200px", backgroundColor: band.sound ? "teal" : "rgb(35, 62, 63)"}} className="instrument-box  offset-4">{band.sound ? 'Sound system available' : 'Sound system not available'}</div>  
+                            <div style={{minWidth: "200px", backgroundColor: band.sound ? "teal" : "rgb(35, 62, 63)"}} className="band-instrument-box  offset-4">{band.sound ? 'Sound system available' : 'Sound system not available'}</div>  
                         </div>
                         <div className="row">
 
-                            <div className="flex-row-start col-md-6 col-6" >{band.city.toUpperCase()}<span style={{marginLeft: 20, marginRight: 4}}>{band.state}</span><span>{band.zipcode}</span></div>
+                            <div className="band-location-container col-md-6 col-6" >{band.city.toUpperCase()}<span style={{marginLeft: 20, marginRight: 4}}>{band.state}</span><span>{band.zipcode}</span></div>
                         </div>
                     
                         <div className="flex-row-start" style={{position: 'absolute', bottom: '6px', right:0}}>
@@ -150,7 +150,7 @@ function BandList(props) {
         return ( 
             <div className="container">
                 <h2>BandList</h2>
-                <div className="band-container">
+                <div >
                     {dataExample.map((band, i) => {
                         return (
                             <BandBox key={i} band={band} />

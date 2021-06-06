@@ -3,7 +3,6 @@ import { Button, Form, FormGroup, Label, Input, FormText, Col, Row } from 'react
 
 
 const Login = props => {
-
     return (
         <div className="container mt-5">
             <Row className="p-5">
@@ -27,14 +26,14 @@ const Login = props => {
                                 // onChange={(e) => setSound(e.target.checked)}
                                 
                             />
-                            Reliable sound system
+                            Save my credentials
                         </Label>
                     </FormGroup>
-                    <Button>Submit</Button>
+                    <Button color="info" >Submit</Button>
+                    <Button color="secondary" className="ml-5">cancel</Button>
                 </Form>
             </Row>
         </div>
     )
 }
-
 export default Login;

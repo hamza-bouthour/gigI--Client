@@ -44,3 +44,8 @@ export const addNewBand = (data) => dispatch => {
     });
 }
 
+export const editBand = (data) => dispatch => ({
+    type: ActionTypes.EDIT_PROFILE,
+    payload: data
+})
+

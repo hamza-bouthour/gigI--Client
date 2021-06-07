@@ -30,6 +30,7 @@ body {
   background-color: $primary-back-color !important; 
   color:rgb(250, 250, 250) !important; 
 }
+
 // Header and Nav styling
 .absoluteLogo {
   width: 220px;
@@ -39,6 +40,9 @@ body {
   top: 0;
   bottom: 0;
   margin: auto;
+}
+.cancel-delete-btn {
+  background-color: $disabled-color !important;
 }
 .nav-container {
   background-color: $nav-color;

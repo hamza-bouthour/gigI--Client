@@ -15,7 +15,7 @@ export const addBands = data => ({
 });
 export const fetchBands = () => dispatch => {
     dispatch(bandsLoading())
-    fetch(bandsUrl, {
+  return  fetch(bandsUrl, {
         method: 'GET', 
         headers: {
             "Content-type": "application/json; charset=UTF-8"
@@ -28,7 +28,8 @@ export const fetchBands = () => dispatch => {
     });
 }
 
-export const addNewBand = (data) => dispatch => {
+export const fetchNewBand = (data) => dispatch => {
+    dispatch(addNewBand(data))
     fetch(bandsUrl, {
         method: 'POST', 
         body: JSON.stringify(data),
@@ -43,6 +44,31 @@ export const addNewBand = (data) => dispatch => {
         console.error('Error:', error);
     });
 }
+export const addNewBand = (data) => ({
+    type: ActionTypes.ADD_NEW_BAND,
+    payload: data
+})
+
+export const fetchNewGuest= (data) => dispatch => {
+    dispatch(addNewGuest(data))
+    fetch(bandsUrl, {
+            method: 'POST', 
+            body: JSON.stringify(data),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+        .then(response => console.log(response))
+        .catch((error) => {
+        console.error('Error:', error);
+    });
+}
+export const addNewGuest = (data) => ({
+    type: ActionTypes.ADD_NEW_BAND,
+    payload: data
+
+})
+
 
 export const editBand = (data) => dispatch => ({
     type: ActionTypes.EDIT_PROFILE,

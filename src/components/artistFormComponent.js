@@ -1,7 +1,17 @@
 import React, { useState } from 'react';
 import { Button, Form, FormGroup, Label, Input, FormText, Col, Row } from 'reactstrap';
 import bandsUrl from '../config';
+import { connect } from 'react-redux';
+import { fetchNewBand } from '../redux/ActionCreators';
 
+const mapDispatchToProps = {
+    fetchNewBand
+}
+const mapStateToProps = (bands) =>{
+    return {
+        bands
+    }
+}
 const ArtistForm = props => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -28,6 +38,7 @@ const ArtistForm = props => {
             sound
         }
         console.log(data)
+        props.fetchNewBand(data);
   
     
 }
@@ -142,7 +153,7 @@ const ArtistForm = props => {
     )
 }
 
-export default ArtistForm;
+export default connect(mapStateToProps, mapDispatchToProps)(ArtistForm);
 
         // {name, style, lineup, zipcode, sound}
    

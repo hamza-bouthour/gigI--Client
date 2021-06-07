@@ -11,7 +11,7 @@ export const bands = (state = {isLoading: true, errMess: null, bands: []}, actio
         case ActionTypes.BANDS_LOADING: 
             return {...state, isLoading: true, errMess: null, bands: []}
         case ActionTypes.BANDS_FAILED: 
-            return {...state, isLoading: false, errMess: action.payload}
+            return {...state, isLoading: true, errMess: action.payload}
         case ActionTypes.ADD_BANDS: 
             return {...state, isLoading: false, errMess: null, bands: action.payload}
         case ActionTypes.ADD_NEW_BAND: 

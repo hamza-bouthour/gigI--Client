@@ -1,24 +1,36 @@
 import React, { useState } from 'react';
 import { Button, Form, FormGroup, Label, Input, FormText, Col, Row } from 'reactstrap';
+import { connect } from 'react-redux';
+import { addNewGuest } from '../redux/ActionCreators';
+
+const mapDispatchToProps = {
+    addNewGuest
+}
+const mapStateToProps = (bands) =>{
+    return {
+        bands
+    }
+}
 
 const RecruiterForm = props => {
-    const [recFirstName, setFirstName] = useState('');
-    const [rectLastName, setLastName] = useState('');
-    const [recEmail, setEmail] = useState('');
-    const [recPassword, setPassword] = useState('');
-    const [recZipCode, setZipcode] = useState('');
-    const [recEvent, setEvent] = useState('');
+    const [firstname, setFirstName] = useState('');
+    const [lastname, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [zipcode, setZipcode] = useState('');
+    const [event, setEvent] = useState('');
     
     function handleClick () {
         const data = [
-            recFirstName,
-            rectLastName,
-            recEmail,
-            recPassword,
-            recZipCode,
-            recEvent
+            firstname,
+            lastname,
+            email,
+            password,
+            zipcode,
+            event
         ]
-        console.log(data)
+        // console.log(data)
+        // props.addNewGuest(data);
     }
     return (
         <div style={{display: props.displayRecruiterForm}} className="recruiter-form">
@@ -98,4 +110,4 @@ const RecruiterForm = props => {
     )
 }
 
-export default(RecruiterForm);
+export default connect(mapStateToProps, mapDispatchToProps)(RecruiterForm);

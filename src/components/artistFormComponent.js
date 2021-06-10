@@ -27,6 +27,7 @@ const ArtistForm = props => {
     const [sound, setSound] = useState(true);
     const [loading, enableLoading] = useState(false);
     const [subscribed, enableSubscribe] = useState(false);
+    const [image, setImage] = useState(null);
 
     const fetchNewBand = data => {
         enableLoading(true);
@@ -65,7 +66,8 @@ const ArtistForm = props => {
             country,
             city,
             zipcode,
-            sound
+            sound,
+            image
         }
         fetchNewBand(data);
   
@@ -103,6 +105,13 @@ const ArtistForm = props => {
                         <Label htmlFor="nameIn">Name</Label>
                         <Input type="text" name="name" id="nameIn" placeholder="at least 5 caracters" 
                             onChange={(e) => setName(e.target.value)}
+                        />
+                    </FormGroup>
+
+                    <FormGroup>
+                        <Label htmlFor="imageIn">Im</Label>
+                        <Input type="file" name="name" id="imageIn" placeholder="jpg" 
+                            onChange={(e) => setImage(e.target.files[0])}
                         />
                     </FormGroup>
                     <FormGroup>
@@ -181,6 +190,13 @@ const ArtistForm = props => {
                         onClick={() => handleClick()}
                     >
                         Submit
+                    </Button>
+                    <Button 
+                        
+                        className="form-submit-btn"
+                        onClick={() => console.log(image)}
+                    >
+                        Image
                     </Button>
             </Form>
         </div>

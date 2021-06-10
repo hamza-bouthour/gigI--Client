@@ -1,36 +1,23 @@
-import React, { useState } from 'react';
-import { Button, Form, FormGroup, Label, Input, FormText, Col, Row } from 'reactstrap';
-import bandsUrl from '../config';
-import { NavLink, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Button, Form, FormGroup, Label, Input, Col, Row } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Loading from './LoadingComponent';
-import { editBand } from '../redux/ActionCreators';
+import { editBand, loginSuccessful, logoutUser } from '../redux/ActionCreators';
 const mapDispatchToProps = {
-    editBand
+    editBand,
+    loginSuccessful,
+    
+
 }
-const mapStateToProps = (bands) =>{
+const mapStateToProps = (bands, user) =>{
     return {
-        bands
+        bands,
+        user
     }
 }
 
-const dataExample =   {
-    id:1,
-    bookings: 0,
-    image:'https://i.postimg.cc/pd5RNwrM/resume-Photo.jpg',
-    background: 'https://i.postimg.cc/kgCznDcc/MBackground.jpg',
-    name: 'hamzssa',
-    style: ['PUNK', 'ROCK'],
-    email: 'asbsa@gmail.com',
-    description: 'bla bla bla and also why not bleu bleu or Blue BLue? may be not bleu, because it should be a band musical experience, maybe discography...',
-    country: 'USA',
-    city: 'Tracy',
-    lineup: 4,
-    instruments: ['GUITAR', 'DRUMS', 'KEYBOARD', 'VOCALS'],
-    state: "California",
-    zipcode: 34532,
-    sound: true
-}
+
 const Profile = props => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -43,7 +30,17 @@ const Profile = props => {
     const [zipcode, setZipcode] = useState(0);
     const [sound, setSound] = useState(true);
     const [formControl, setControl] = useState(true);
-    const [placeHolder, setPlaceHolder] = useState('input-profile-disable')
+    const [placeHolder, setPlaceHolder] = useState('input-profile-disable');
+    const [subscriber, setSebscriber] = useState(null);
+
+    useEffect(() => {
+        
+        setSebscriber(props.bands.user.user);
+        props.loginSuccessful()
+        
+        // console.log(props.bands.user.user);
+
+    }, [])
 
    function handleClick() {
         const data = {
@@ -60,21 +57,46 @@ const Profile = props => {
         }
         console.log(data)
 }
+    const client = subscriber || props.bands.user.user;
+    if (!subscriber || !props.bands.user.user) {
+        return (       
+                <div className="center-screen-loadingGif">
+                   <h5>You are not logged in...</h5> 
+                    <div>
+                        <Link to="/login">
+                            <Button className="btn-form-starter mr-2" style={{minWidth: "90px", backgroundColor: "#EE5407"}}>
+                                Log-in
+                            </Button>
+                        </Link>
+                        <Link to="/home">
+                            <Button className="btn-form-starter" style={{minWidth: "90px", backgroundColor: "#EE5407"}}>
+                                Sign-up
+                            </Button>
+                        </Link>
+                    </div>
+                </div>  
+        )
+    }
+    if (props.bands.user.loading) {
+        return (
+            <Loading />
+        )
+    } else {
+
+    
     return (
         <div style={{display: props.displayBandForm}} className="container mt-5 p-5">
 
+
             <Form>
                 <Row>
-                    <Col>
-                        <p>{dataExample.bookings} Bookings</p>
-                    </Col>
                 </Row>
                 <fieldset disabled={formControl}>
                 <Row form>
                     <Col md={12}>
                         <FormGroup>
                             <Label htmlFor="emailIn">Email</Label>
-                            <Input className="input-profile-disable" style={{backgroundColor: formControl  ? 'rgb(28, 71, 71)' : 'white'}} type="text" name="email" id="emailIn" placeholder={dataExample.email}
+                            <Input className="input-profile-disable" style={{backgroundColor: formControl  ? 'rgb(28, 71, 71)' : 'white'}} type="text" name="email" id="emailIn" placeholder={client.email}
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                         </FormGroup>
@@ -83,7 +105,7 @@ const Profile = props => {
                 </Row>
                     <FormGroup>
                         <Label htmlFor="nameIn">Name</Label>
-                        <Input className="input-profile-disable" style={{backgroundColor: formControl  ? 'rgb(28, 71, 71)' : 'white'}} type="text" name="name" id="nameIn"placeholder={dataExample.name} 
+                        <Input className="input-profile-disable" style={{backgroundColor: formControl  ? 'rgb(28, 71, 71)' : 'white'}} type="text" name="name" id="nameIn"placeholder={client.name} 
                             onChange={(e) => setName(e.target.value)}
                         />
                     </FormGroup>
@@ -92,7 +114,7 @@ const Profile = props => {
                             <Input className="input-profile-disable " style={{backgroundColor: formControl ? 'rgb(28, 71, 71)' : 'white'}} type="select" name="event" id="eventRecruiterIn" 
                                 onChange={(e) => setStyle(e.target.value)}
                             >
-                            <option value={dataExample.style[0]}>{dataExample.style[0]}</option>
+                            <option value={client.style}>{client.style}</option>
                             <option value="Blues">Blues</option>
                             <option value="Latino music">Latino music</option>
                             <option value="Country">Country</option>
@@ -103,7 +125,7 @@ const Profile = props => {
                         </FormGroup>
                     <FormGroup>
                         <Label htmlFor="descIn" >Description</Label>
-                        <Input className="input-profile-disable" style={{backgroundColor: formControl  ? 'rgb(28, 71, 71)' : 'white'}} type="textarea" name="style" id="descIn" placeholder={dataExample.description} 
+                        <Input className="input-profile-disable" style={{backgroundColor: formControl  ? 'rgb(28, 71, 71)' : 'white'}} type="textarea" name="style" id="descIn" placeholder={client.description} 
                             onChange={(e) => setDescription(e.target.value)}
                         />
                     </FormGroup>
@@ -111,7 +133,7 @@ const Profile = props => {
                     <Col md={6}>
                         <FormGroup>
                             <Label htmlFor="lineupIn">Line-up</Label>
-                            <Input className="input-profile-disable" style={{backgroundColor: formControl  ? 'rgb(28, 71, 71)' : 'white'}} type="number" name="lineUp" id="lineupIn" placeholder={dataExample.lineup} 
+                            <Input className="input-profile-disable" style={{backgroundColor: formControl  ? 'rgb(28, 71, 71)' : 'white'}} type="number" name="lineUp" id="lineupIn" placeholder={client.lineup} 
                                 onChange={(e) => setLineup(e.target.value)}
                             />
                         </FormGroup>
@@ -121,7 +143,7 @@ const Profile = props => {
                     <Col md={4} className="my-auto offset-2">
                         <FormGroup style={{marginLeft: 20}}> 
                             <Label>
-                                <Input className="input-profile-disable" style={{backgroundColor: formControl  ? 'rgb(28, 71, 71)' : 'white'}} type="checkbox" name="sound" checked={dataExample.sound}
+                                <Input className="input-profile-disable" style={{backgroundColor: formControl  ? 'rgb(28, 71, 71)' : 'white'}} type="checkbox" name="sound" checked={client.sound}
                                     onChange={(e) => setSound(e.target.checked)}
                                     
                                 />
@@ -135,7 +157,7 @@ const Profile = props => {
                     <Col md={4}>
                         <FormGroup>
                             <Label htmlFor="countryIn" >Country</Label>
-                            <Input className="input-profile-disable" style={{backgroundColor: formControl ? 'rgb(28, 71, 71)' : 'white'}} type="text" name="style" id="countryIn" placeholder={dataExample.country} 
+                            <Input className="input-profile-disable" style={{backgroundColor: formControl ? 'rgb(28, 71, 71)' : 'white'}} type="text" name="style" id="countryIn" placeholder={client.country} 
                                 onChange={(e) => setCountry(e.target.value)}
                             />
                         </FormGroup>
@@ -143,7 +165,7 @@ const Profile = props => {
                     <Col md={4}>
                         <FormGroup>
                             <Label htmlFor="cityIn" >City</Label>
-                            <Input className="input-profile-disable" style={{backgroundColor: formControl  ? 'rgb(28, 71, 71)' : 'white'}} type="text" name="style" id="cityIn" placeholder={dataExample.city} 
+                            <Input className="input-profile-disable" style={{backgroundColor: formControl  ? 'rgb(28, 71, 71)' : 'white'}} type="text" name="style" id="cityIn" placeholder={client.city} 
                                 onChange={(e) => setCity(e.target.value)}
                             />
                         </FormGroup>
@@ -151,7 +173,7 @@ const Profile = props => {
                     <Col md={4}>
                         <FormGroup>
                             <Label htmlFor="zipcodeIn">Zip-code</Label>
-                            <Input className="input-profile-disable" style={{backgroundColor: formControl  ? 'rgb(28, 71, 71)' : 'white'}} type="number" name="zipCode" id="zipcodeIn" placeholder={dataExample.zipcode} 
+                            <Input className="input-profile-disable" style={{backgroundColor: formControl  ? 'rgb(28, 71, 71)' : 'white'}} type="number" name="zipCode" id="zipcodeIn" placeholder={client.zipcode} 
                                 onChange={(e) => setZipcode(e.target.value)}
                             />
                         </FormGroup>
@@ -191,7 +213,7 @@ const Profile = props => {
 
                 </Row>
         </div>
-    )
+    )}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

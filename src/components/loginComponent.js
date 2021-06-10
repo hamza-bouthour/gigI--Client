@@ -1,7 +1,16 @@
 import React, { useState } from 'react';
 import { Button, Form, FormGroup, Label, Input, FormText, Col, Row } from 'reactstrap';
+import { connect } from 'react-redux';
+import { loginUser } from '../redux/ActionCreators'
 
-
+const mapDispatchToProps = {
+    loginUser
+}
+const mapStateToProps = (user) =>{
+    return {
+        user
+    }
+}
 const Login = props => {
 
     const [email, setEmail] = useState('');
@@ -12,9 +21,10 @@ const Login = props => {
         const data ={
             email,
             password,
-            saveCre
+           
         }
         console.log(data)
+        props.loginUser(data);
     }
     return (
         <div className="container mt-5">
@@ -56,4 +66,4 @@ const Login = props => {
         </div>
     )
 }
-export default Login;
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

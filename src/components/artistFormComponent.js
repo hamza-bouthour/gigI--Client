@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import { Button, Form, FormGroup, Label, Input, FormText, Col, Row } from 'reactstrap';
-import bandsUrl from '../config';
+import urls from '../config';
 import { connect } from 'react-redux';
-import { fetchNewBand } from '../redux/ActionCreators';
+import { addNewBand } from '../redux/ActionCreators';
+import Loading from './LoadingComponent';
 
 const mapDispatchToProps = {
-    fetchNewBand
+    addNewBand
 }
 const mapStateToProps = (bands) =>{
     return {
         bands
     }
 }
+
 const ArtistForm = props => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -23,7 +25,35 @@ const ArtistForm = props => {
     const [city, setCity] = useState('');
     const [zipcode, setZipcode] = useState(0);
     const [sound, setSound] = useState(true);
+    const [loading, enableLoading] = useState(false);
+    const [subscribed, enableSubscribe] = useState(false);
 
+    const fetchNewBand = data => {
+        enableLoading(true);
+        addNewBand(data);
+        fetch(urls.bandsUrl, {
+            method: 'POST', 
+            body: JSON.stringify(data),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+            })
+            .then(response => response.json())
+            .then(response => {console.log(response)})
+            .then(response => {
+                    {
+                    setTimeout(() => {
+                        enableLoading(false)
+                        enableSubscribe(true)
+                    }, 3000)
+                    
+                }
+            })
+            .catch((error) => {
+            console.error('Error:', error);
+        });
+       
+    }
    function handleClick() {
         const data = {
             email,
@@ -37,11 +67,15 @@ const ArtistForm = props => {
             zipcode,
             sound
         }
-        console.log(data)
-        props.fetchNewBand(data);
+        fetchNewBand(data);
   
     
 }
+    if (loading) {
+        return (
+            <Loading />
+        )
+    }
 
     return (
         <div style={{display: props.displayBandForm}} className="band-form">

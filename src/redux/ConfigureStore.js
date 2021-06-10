@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 // import { composeWithDevTools } from 'redux-devtools-extension';
 import { bands } from './bands';
+import { user } from './user';
 
 // const config = {
 //     key: 'root',
@@ -14,7 +15,8 @@ const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 export const ConfigureStore = () => {
     const store = createStore(
         combineReducers({
-            bands
+            bands,
+            user
         }),
         composeEnhancer(applyMiddleware(thunk, logger))
     );

@@ -7,7 +7,7 @@ const BandBox = props => {
     const {band} = props
     const [boxBtns, adjustBorders] = useState('teal');
     return (
-            <Link  to={`bands/${band.band_id}`}>
+            
 
 
                 <div className="media p-2 m-3 band-box" style={{border: `solid 1px ${boxBtns}`}} onMouseOver={() => adjustBorders('rgb(2, 234, 241)')} onPointerOut={() => adjustBorders('rgb(37, 118, 121)')}>
@@ -32,13 +32,14 @@ const BandBox = props => {
                             <div className="flex-row-start" >
                                 <button className="btn-band-box" style={{border: `solid 1px ${boxBtns}`}}><i class="fa fa-1x fa-id-badge mr-1"></i>Profile</button>
                                 <button className="btn-band-box" style={{border: `solid 1px ${boxBtns}`}}><i class="fa fa-1x fa-star mr-1"></i>Favorite</button>
+                                <button className="btn-band-box" style={{border: `solid 1px ${boxBtns}`}} onClick={() => props.deleteBand()}>Delete</button>
                                 <button disabled className="btn-band-box" style={{backgroundColor: "rgb(35, 62, 63)", border: "none"}}><i class="fa fa-1x fa-address-book mr-1"></i>Book</button>
                             </div>
                         </div>
                     </div>
                     
                 </div>
-            </Link>
+           
     )
 }
 export default BandBox;

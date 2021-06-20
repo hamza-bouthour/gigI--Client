@@ -70,6 +70,7 @@ const ArtistForm = props => {
             image
         }
         fetchNewBand(data);
+        console.log(data)
   
     
 }
@@ -110,7 +111,7 @@ const ArtistForm = props => {
 
                     <FormGroup>
                         <Label htmlFor="imageIn">Im</Label>
-                        <Input type="file" name="name" id="imageIn" placeholder="jpg" 
+                        <Input type="file" name="image" id="imageIn" placeholder="jpg" 
                             onChange={(e) => setImage(e.target.files[0])}
                         />
                     </FormGroup>

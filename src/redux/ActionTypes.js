@@ -12,6 +12,7 @@ export const GET_BAND = 'GET_BAND';
 export const ADD_NEW_GUEST = 'ADD_NEW_GUEST';
 export const EDIT_GUEST = 'EDIT_GUEST';
 
+
 export const LOGIN_USER = 'LOGIN_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
 export const LOGIN_SUCCESSFUL = 'LOGIN_SUCCESSFUL';

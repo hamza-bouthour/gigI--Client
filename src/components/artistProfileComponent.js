@@ -32,6 +32,7 @@ const Profile = props => {
     const [formControl, setControl] = useState(true);
     const [placeHolder, setPlaceHolder] = useState('input-profile-disable');
     const [subscriber, setSebscriber] = useState(null);
+    const [file, uploadFile] = useState(null);
 
     useEffect(() => {
         
@@ -86,7 +87,16 @@ const Profile = props => {
     
     return (
         <div style={{display: props.displayBandForm}} className="container mt-5 p-5">
-
+            <div>
+                <Form>
+                    <FormGroup>
+                        <Input type="file" name="fileUploader" 
+                            onChange={(e) => uploadFile(e.target.value)}
+                        />
+                        <Button type="submit" onClick={() => { console.log(file) }}>Submit</Button>
+                    </FormGroup>
+                </Form>
+            </div>
 
             <Form>
                 <Row>

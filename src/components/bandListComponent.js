@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { fetchBands } from '../redux/ActionCreators';
+import { Link } from 'react-router-dom';
+import { fetchBands, deleteBand } from '../redux/ActionCreators';
 import Loading from './LoadingComponent';
 import {
     Card, CardText, CardBody, CardLink,
@@ -9,7 +10,8 @@ import {
   import BandBox from './bandComponent';
 
 const mapDispatchToProps = {
-    fetchBands
+    fetchBands,
+    deleteBand
 }
 const mapStateToProps = (bands, user) =>{
     return {
@@ -105,7 +107,9 @@ function BandList(props) {
                 <div >
                     {props.bands.bands.bands.data.map((band, i) => {
                         return (
-                            <BandBox key={i} band={band} />
+                            <Link  to={`bands/${band.band_id}`}>
+                                <BandBox key={i} band={band} deleteBand={props.deleteBand(band)}/>
+                            </Link>
                         )
                     })}
                 </div>

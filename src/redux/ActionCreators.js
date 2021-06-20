@@ -1,5 +1,6 @@
 import * as ActionTypes from './ActionTypes';
 import urls from '../config';
+import { actionTypes } from 'react-redux-form';
 
 // bands reducer actions
 export const bandsLoading = () => ({
@@ -76,6 +77,15 @@ export const editBand = (data) => dispatch => ({
     type: ActionTypes.EDIT_PROFILE,
     payload: data
 })
+export const deleteBand = (band) => 
+// ({
+//     type: ActionTypes.DELETE_BAND,
+//     payload: band
+
+// }) 
+{
+    console.log(band)
+}
 // export const fetchBand = data => dispatch => {
 //     console.log(data)
 //     fetch(urls.bandsUrl, {

@@ -18,9 +18,9 @@ const mapStateToProps = (bands, user) =>{
     }
 }
 const Main = (props) => {
-    const BandInfo = ({match}) => {
+    const BandInfo = ({band}) => {
         return (
-            <BandBox band={props.bands.bands.bands.data.filter(band => band.band_id === +match.params.bandId)[0]}/>
+            <BandBox band={props.bands.bands.bands.data.filter(band => band.band_id === band.band_id)[0]}/>
         )
     }
      

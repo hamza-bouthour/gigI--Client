@@ -16,6 +16,7 @@ const Login = props => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [saveCre, setCred] = useState(false);
+    const [file, uploadFile] = useState(null);
 
     function handleClick() {
         const data ={
@@ -26,8 +27,34 @@ const Login = props => {
         console.log(data)
         props.loginUser(data);
     }
+    function testUpload(data) {
+            const formData = new FormData()
+            formData.append('imageFile', data)
+            console.log(formData)
+            fetch('http://192.168.1.82:3001/upload', {
+                method: 'POST', 
+                body: formData,
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            })
+            .then(response => response.json())
+            .then(response => console.log(response))
+            .catch((error) => {
+            console.error('Error:', error);
+        });
+        
+    }
     return (
         <div className="container mt-5">
+             <Form>
+                    <FormGroup>
+                        <Input type="file" name="fileUploader" 
+                            onChange={(e) => uploadFile(e.target.files[0])}
+                        />
+                        <Button type="button" onClick={() => { testUpload(file) }}>Submit</Button>
+                    </FormGroup>
+                </Form>
             <Row className="p-5">
                 <p className="col-10 offset-1 col-md-6 offset-md-2 mr-md-5 pl-5 mb-2">Login using your Facebook or Google account.</p>
                 <Button id="login-fb-btn" className="col-10 col-md-6 offset-md-3 offset-1 mb-2"><img style={{width: "23px", margin: "auto"}} src="https://i.postimg.cc/CxpWQKrW/317746-20.png"/>acebook</Button>

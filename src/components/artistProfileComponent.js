@@ -37,7 +37,7 @@ const Profile = props => {
     useEffect(() => {
         
         setSebscriber(props.bands.user.user);
-        props.loginSuccessful()
+        // props.loginSuccessful()
         
         // console.log(props.bands.user.user);
 
@@ -59,7 +59,7 @@ const Profile = props => {
         console.log(data)
 }
     const client = subscriber || props.bands.user.user;
-    if (!subscriber || !props.bands.user.user) {
+    if (!client) {
         return (       
                 <div className="center-screen-loadingGif">
                    <h5>You are not logged in...</h5> 
@@ -87,16 +87,6 @@ const Profile = props => {
     
     return (
         <div style={{display: props.displayBandForm}} className="container mt-5 p-5">
-            <div>
-                <Form>
-                    <FormGroup>
-                        <Input type="file" name="fileUploader" 
-                            onChange={(e) => uploadFile(e.target.value)}
-                        />
-                        <Button type="submit" onClick={() => { console.log(file) }}>Submit</Button>
-                    </FormGroup>
-                </Form>
-            </div>
 
             <Form>
                 <Row>

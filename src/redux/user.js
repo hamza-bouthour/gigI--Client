@@ -8,8 +8,10 @@ export const user = (state = {loading: false, loggedIn: false, errMess: null, us
             return {...state,loading: true, loggedIn: true, errMess: null, user: action.payload}
         case ActionTypes.LOGOUT_USER: 
             return {...state,loading: false, loggedIn: false, errMess: null, user: null}
-        case ActionTypes.LOGIN_SUCCESSFUL:
-            return {...state, loading: false}
+        // case ActionTypes.LOGIN_SUCCESSFUL:
+        //     return {...state}
+        case ActionTypes.ADD_NEW_USER:
+            return {...state, loggedIn: true, user: action.payload}
         default:
             return state;
     }

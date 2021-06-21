@@ -1,6 +1,18 @@
 
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { fetchBands, fetchDeleteBand } from '../redux/ActionCreators';
+const mapDispatchToProps = {
+    fetchBands,
+    fetchDeleteBand
+}
+const mapStateToProps = (bands, user) =>{
+    return {
+        bands,
+        user
+    }
+}
 const BandBox = props => {
 
     
@@ -32,7 +44,8 @@ const BandBox = props => {
                             <div className="flex-row-start" >
                                 <button className="btn-band-box" style={{border: `solid 1px ${boxBtns}`}}><i class="fa fa-1x fa-id-badge mr-1"></i>Profile</button>
                                 <button className="btn-band-box" style={{border: `solid 1px ${boxBtns}`}}><i class="fa fa-1x fa-star mr-1"></i>Favorite</button>
-                                <button className="btn-band-box" style={{border: `solid 1px ${boxBtns}`}} onClick={() => props.deleteBand()}>Delete</button>
+
+                                <button className="btn-band-box" style={{border: `solid 1px ${boxBtns}`}} onClick={() => props.fetchDeleteBand(band)}><Link to="/bands">Delete</Link></button>
                                 <button disabled className="btn-band-box" style={{backgroundColor: "rgb(35, 62, 63)", border: "none"}}><i class="fa fa-1x fa-address-book mr-1"></i>Book</button>
                             </div>
                         </div>
@@ -42,4 +55,4 @@ const BandBox = props => {
            
     )
 }
-export default BandBox;
+export default connect(mapStateToProps, mapDispatchToProps)(BandBox);

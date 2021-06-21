@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Header from './headerComponent';
 import Home from './homeComponent';
 import BandList from './bandListComponent';
 import Login from './loginComponent';
 import Profile from './artistProfileComponent';
 import BandBox from './bandComponent';
-import { Switch, Route, Redirect, withRouter} from 'react-router-dom';
+import { Switch, Route, Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';
 
 // const mapDispatchToProps = {
@@ -20,7 +20,14 @@ const mapStateToProps = (bands, user) =>{
 const Main = (props) => {
     const BandInfo = ({band}) => {
         return (
-            <BandBox band={props.bands.bands.bands.data.filter(band => band.band_id === band.band_id)[0]}/>
+            <div className="container mt-5">
+                <div className="row">
+                    <div className="col-12">
+                        <BandBox band={props.bands.bands.bands.data.filter(band => band.band_id === band.band_id)[0]}/>
+
+                    </div>
+                </div>
+            </div>
         )
     }
      
@@ -31,7 +38,6 @@ const Main = (props) => {
                 <Route exact path='/home' component={Home} />
                 <Route exact path='/bands' component={BandList} />
                 <Route path='/bands/:bandId' component={BandInfo} />
-                {/* <Route exact path='/login' component={Login} /> */}
                 <Route exact path='/profile' component={Profile} />
                 <Route exact path="/login">
                     {props.bands.user.loggedIn ? <Redirect to="/profile" /> : <Login />}

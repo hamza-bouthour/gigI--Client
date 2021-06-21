@@ -1,6 +1,6 @@
 import * as ActionTypes from './ActionTypes';
 import urls from '../config';
-import { actionTypes } from 'react-redux-form';
+
 
 // bands reducer actions
 export const bandsLoading = () => ({
@@ -30,27 +30,37 @@ export const fetchBands = () => dispatch => {
             new Error(error.message)
     });
 }
+export const fetchQueryBands = () => dispatch => {
+    dispatch(bandsLoading())
+   return fetch(urls.bandsUrl, {
+        method: 'GET', 
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+        })
+        
+        .then(response => response.json())
+        .then(response => dispatch(addBands(response)))
+        .then(response => console.log(response))
+        .catch((error) => {
+            new Error(error.message)
+    });
+}
 
-// export const fetchNewBand = (data) => dispatch => {
-//     dispatch(addNewBand(data))
-//     fetch(bandsUrl, {
-//         method: 'POST', 
-//         body: JSON.stringify(data),
-//         headers: {
-//             "Content-type": "application/json; charset=UTF-8"
-//         }
-//         })
-//         .then(response => {
-//         console.log(response);
-//         })
-//         .catch((error) => {
-//         console.error('Error:', error);
-//     });
-// }
-export const addNewBand = (data) => ({
+export const addNewBand = data => {
+    console.log(data)
+return {
     type: ActionTypes.ADD_NEW_BAND,
     payload: data
-})
+}
+}
+export const addNewUser = data => {
+    console.log('new USER')
+    return {
+        type: ActionTypes.ADD_NEW_USER,
+        payload: data
+    }
+}
 
 export const fetchNewGuest= (data) => dispatch => {
     dispatch(addNewGuest(data))
@@ -67,7 +77,7 @@ export const fetchNewGuest= (data) => dispatch => {
     });
 }
 export const addNewGuest = (data) => ({
-    type: ActionTypes.ADD_NEW_BAND,
+    type: ActionTypes.ADD_NEW_GUEST,
     payload: data
 
 })
@@ -77,30 +87,24 @@ export const editBand = (data) => dispatch => ({
     type: ActionTypes.EDIT_PROFILE,
     payload: data
 })
-export const deleteBand = (band) => 
-// ({
-//     type: ActionTypes.DELETE_BAND,
-//     payload: band
-
-// }) 
-{
-    console.log(band)
+export const fetchDeleteBand = (band) => dispatch => {
+    fetch(`${urls.bandsUrl}/${band.band_id}`, {
+                method: 'DELETE', 
+                body: JSON.stringify(band),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            })
+            .then(response => dispatch(deleteBand(band)))
+            .then(response => console.log(response))
+            .catch((error) => {
+            console.error('Error:', error);
+        });
 }
-// export const fetchBand = data => dispatch => {
-//     console.log(data)
-//     fetch(urls.bandsUrl, {
-//         method: 'GET', 
-//         body: JSON.stringify(data.email),
-//         headers: {
-//             "Content-type": "application/json; charset=UTF-8"
-//         }
-//     })
-//     .then(response => console.log(response))
-//     .then(response => dispatch(subscribeUser(response)))
-//     .catch((error) => {
-//     console.error('Error:', error);
-// });
-// }
+export const deleteBand = band => ({
+    type: ActionTypes.DELETE_BAND,
+    payload: band
+})
 export const loginUser = data  => dispatch => {
     console.log(data)
     fetch(`${urls.usersUrl}/`, {

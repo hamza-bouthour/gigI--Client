@@ -1,17 +1,27 @@
 import React, { useState } from 'react';
-import { Button, Form, FormGroup, Label, Input, FormText, Col, Row } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Col, Row } from 'reactstrap';
 import urls from '../config';
 import { connect } from 'react-redux';
-import { addNewBand } from '../redux/ActionCreators';
+import { addNewBand, addNewUser } from '../redux/ActionCreators';
 import Loading from './LoadingComponent';
+import { Link } from 'react-router-dom';
 
 const mapDispatchToProps = {
-    addNewBand
+    addNewBand,
+    addNewUser
 }
 const mapStateToProps = (bands) =>{
     return {
         bands
     }
+}
+
+const FormRedirection = props => {
+    return (
+        <div>
+            <h3>Account successfully created!</h3>
+        </div>
+    )
 }
 
 const ArtistForm = props => {
@@ -26,12 +36,13 @@ const ArtistForm = props => {
     const [zipcode, setZipcode] = useState(0);
     const [sound, setSound] = useState(true);
     const [loading, enableLoading] = useState(false);
-    const [subscribed, enableSubscribe] = useState(false);
+    const [subscribed, enableSubscribe] = useState(true);
     const [image, setImage] = useState(null);
 
     const fetchNewBand = data => {
+        props.addNewBand(data);
+        props.addNewUser(data)
         enableLoading(true);
-        addNewBand(data);
         fetch(urls.bandsUrl, {
             method: 'POST', 
             body: JSON.stringify(data),
@@ -69,14 +80,29 @@ const ArtistForm = props => {
             sound,
             image
         }
+   
         fetchNewBand(data);
-        console.log(data)
   
     
 }
     if (loading) {
         return (
             <Loading />
+        )
+    }
+    if (subscribed) {
+        return (
+            <div className="container my-5"> 
+                <div className="row">
+                    <h3 className="mx-auto">Account successfully Created!</h3>
+                </div>
+                <div className="row my-3">
+                    <div className="mx-auto">
+                        <Link to="/bands" className="button-form-center">Bands</Link>
+                        <Link to="/profile" className="button-form-center">Profile</Link> 
+                    </div>
+                </div>
+            </div>
         )
     }
 
@@ -191,14 +217,7 @@ const ArtistForm = props => {
                         onClick={() => handleClick()}
                     >
                         Submit
-                    </Button>
-                    <Button 
-                        
-                        className="form-submit-btn"
-                        onClick={() => console.log(image)}
-                    >
-                        Image
-                    </Button>
+                    </Button>    
             </Form>
         </div>
     )

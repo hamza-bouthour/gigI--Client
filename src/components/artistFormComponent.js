@@ -36,7 +36,7 @@ const ArtistForm = props => {
     const [zipcode, setZipcode] = useState(0);
     const [sound, setSound] = useState(true);
     const [loading, enableLoading] = useState(false);
-    const [subscribed, enableSubscribe] = useState(true);
+    const [subscribed, enableSubscribe] = useState(false);
     const [image, setImage] = useState(null);
 
     const fetchNewBand = data => {

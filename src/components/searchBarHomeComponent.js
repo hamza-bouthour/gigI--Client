@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchBands, deleteBand } from '../redux/ActionCreators';
+import { fetchBands, deleteBand, fetchQueryBands } from '../redux/ActionCreators';
 
 const mapDispatchToProps = {
     fetchBands,
-    deleteBand
+    deleteBand,
+    fetchQueryBands
 }
-const mapStateToProps = (bands, user) =>{
+const mapStateToProps = (bands, user) => {
     return {
         bands,
         user
@@ -15,14 +16,27 @@ const mapStateToProps = (bands, user) =>{
 }
 
 const SearchBar = props => {
+    const [query, setQuery] = useState(null);
+
+    function searchClick() {
+        const data = {
+            query: query
+        }
+        props.fetchQueryBands(data)
+     
+    }
+
 
     return (
         <form className="row">
-            <input type="text" name="name" id="home-search-input" className="col-10 col-md-6 offset-md-3" placeholder="Rock, Birthday, Jazz band..."/>
+            <input type="text" name="name" id="home-search-input" className="col-10 col-md-6 offset-md-3" placeholder="Rock, Birthday, Jazz band..."
+                onChange={(e) => setQuery(e.target.value)}
+            />
             <div className="col-2">
             <Link to="/bands">
-                <input type="submit"  id="home-search-btn" />
-     
+                <input type="submit"  id="home-search-btn" 
+                    onClick={() => searchClick()}
+                />
             </Link>
             </div>
     </form>

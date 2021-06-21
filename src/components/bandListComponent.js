@@ -16,56 +16,7 @@ const mapStateToProps = (bands, user) =>{
     }
 }
 
-const dataExample = [
-    {
-        id:0,
-        image: 'https://i.postimg.cc/pd5RNwrM/resume-Photo.jpg',
-        background: 'https://i.postimg.cc/kgCznDcc/MBackground.jpg',
-        name: 'HAMZA',
-        style: ['ROCK', 'BLUES'],
-        email: 'asba@gmail.com',
-        description: 'bla bla bla and also why not bleu bleu or Blue BLue? may be not bleu, because it should be a band musical experience, maybe discography...',
-        country: 'USA',
-        city: 'Tracy',
-        lineup: 4,
-        instruments: ['GUITAR', 'DRUMS', 'KEYBOARD', 'VOCALS'],
-        state: "Washington",
-        zipcode: 34532,
-        sound: true
-    },
-    {
-        id:1,
-        image:'https://i.postimg.cc/pd5RNwrM/resume-Photo.jpg',
-        background: 'https://i.postimg.cc/kgCznDcc/MBackground.jpg',
-        name: 'hamzssa',
-        style: ['JAZZ', 'POP'],
-        email: 'asbsa@gmail.com',
-        description: 'bla bla bla and alsoggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg fghfgghfrdgh dfghdfghdfgh  why not bleu bleu or Blue BLue? may be not bleu, because it should be a band musical experience, maybe discography...',
-        country: 'USA',
-        city: 'Tracy',
-        lineup: 4,
-        instruments: ['GUITAR', 'DRUMS', 'KEYBOARD', 'VOCALS'],
-        state: "Utah",
-        zipcode: 34532,
-        sound: false
-    },
-    {
-        id:1,
-        image:'https://i.postimg.cc/pd5RNwrM/resume-Photo.jpg',
-        background: 'https://i.postimg.cc/kgCznDcc/MBackground.jpg',
-        name: 'hamzssa',
-        style: ['PUNK', 'ROCK'],
-        email: 'asbsa@gmail.com',
-        description: 'bla bla bla and also why not bleu bleu or Blue BLue? may be not bleu, because it should be a band musical experience, maybe discography...',
-        country: 'USA',
-        city: 'Tracy',
-        lineup: 4,
-        instruments: ['GUITAR', 'DRUMS', 'KEYBOARD', 'VOCALS'],
-        state: "California",
-        zipcode: 34532,
-        sound: true
-    }
-]
+
 function addStyle (band) {
     const bandBoxStyle = {
         border: 'solid 3px #EE5407',
@@ -82,10 +33,7 @@ function addStyle (band) {
 function BandList(props) {
     const [bands, getData] = useState([]);
     
-    useEffect(() => {
-        props.fetchBands()
-        console.log(props.bands.user)
-    },[])
+ 
 
         if (props.bands.bands.isLoading) {
             return (
@@ -103,7 +51,7 @@ function BandList(props) {
                 <div >
                     {props.bands.bands.bands.data.map((band, i) => {
                         return (
-                            <Link  to={`bands/${band.band_id}`}>
+                            <Link  key={i} to={`bands/${band.band_id}`}>
                                 <BandBox key={i} band={band}/>
                             </Link>
                         )

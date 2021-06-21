@@ -32,8 +32,6 @@ const Profile = props => {
     const [formControl, setControl] = useState(true);
     const [placeHolder, setPlaceHolder] = useState('input-profile-disable');
     const [subscriber, setSebscriber] = useState(null);
-    const [file, uploadFile] = useState(null);
-
     useEffect(() => {
         
         setSebscriber(props.bands.user.user);

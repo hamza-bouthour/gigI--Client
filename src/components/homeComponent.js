@@ -1,11 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ArtistFrom from './artistFormComponent';
 import RecruiterForm from './guestFromComponent';
 import CommentHome from './commentHomeComponent';
-import SearchBar from './searchBarHomeComponent'
+import SearchBar from './searchBarHomeComponent';
+import { connect } from 'react-redux';
 import { Button, Form, FormGroup, Label, Input, FormText, Col, Row } from 'reactstrap';
+import { fetchBands } from '../redux/ActionCreators';
 
-
+const mapDispatchToProps = {
+    fetchBands,
+    
+}
+const mapStateToProps = (bands, user) =>{
+    return {
+        bands,
+        user
+    }
+}
 const dataExample =[
     {
         name: "Emily Forestier",
@@ -19,9 +30,13 @@ const dataExample =[
     }
 ]
 
+
 const Home = props => {
     const [bandFormDisplay, setBandFormDisplay] = useState('none');
     const [recruiterFromDisplay, setRecFormDisplay] = useState('none');
+    useEffect(() => {
+        props.fetchBands()
+    },[])
     return (
         <div style={{padding: 5}}>
             <div className="jumbotron jumbotron-header mx-auto mt-5 mt-md-2">
@@ -38,9 +53,9 @@ const Home = props => {
             <div className="container-fluid">
                     <Row className="my-5">
                         <Col md={3} className="home-comment-container">
-                         {dataExample.map(ex => {
+                         {dataExample.map((ex, i) => {
                              return (
-                                 <CommentHome userComment={ex}/>
+                                 <CommentHome key={i} userComment={ex}/>
                              )
                          })}
                         </Col>
@@ -90,9 +105,9 @@ const Home = props => {
                     </Row>
                     <Row className="my-5">
                         <Col md={3} className="home-comment-container">
-                            {dataExample.map(ex => {
+                            {dataExample.map((ex, i) => {
                                 return (
-                                    <CommentHome userComment={ex}/>
+                                    <CommentHome key={i} userComment={ex}/>
                                 )
                             })}
                         </Col>
@@ -142,9 +157,9 @@ const Home = props => {
                     </Row>
                     <Row className="my-5">
                         <Col md={3} className="home-comment-container">
-                            {dataExample.map(ex => {
+                            {dataExample.map((ex, i) => {
                                 return (
-                                    <CommentHome userComment={ex}/>
+                                    <CommentHome key={i} userComment={ex}/>
                                 )
                             })}
                         </Col>
@@ -198,5 +213,4 @@ const Home = props => {
         </div>
     )
 }
-
-export default Home;
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

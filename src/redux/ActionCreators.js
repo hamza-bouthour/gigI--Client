@@ -30,18 +30,20 @@ export const fetchBands = () => dispatch => {
             new Error(error.message)
     });
 }
-export const fetchQueryBands = () => dispatch => {
+export const fetchQueryBands = (data) => dispatch => {
+    // console.log(JSON.stringify(data))
     dispatch(bandsLoading())
-   return fetch(urls.bandsUrl, {
-        method: 'GET', 
-        headers: {
-            "Content-type": "application/json; charset=UTF-8"
-        }
+    fetch(urls.searchUrl, {
+        method: 'POST', 
+        body: JSON.stringify(data),
+        // headers: {
+        //     "Content-type": "application/json; charset=UTF-8"
+        // }
         })
         
         .then(response => response.json())
-        .then(response => dispatch(addBands(response)))
-        .then(response => console.log(response))
+        // .then(response => console.log(response))
+        // .then(response => dispatch(addBands(response)))
         .catch((error) => {
             new Error(error.message)
     });
@@ -87,6 +89,9 @@ export const editBand = (data) => dispatch => ({
     type: ActionTypes.EDIT_PROFILE,
     payload: data
 })
+export const searchBand = data => dispatch => {
+
+}
 export const fetchDeleteBand = (band) => dispatch => {
     fetch(`${urls.bandsUrl}/${band.band_id}`, {
                 method: 'DELETE', 

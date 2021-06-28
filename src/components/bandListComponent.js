@@ -49,9 +49,9 @@ function BandList(props) {
             <div className="container">
                 <h2>BandList</h2>
                 <div >
-                    {props.bands.bands.bands.data.map((band, i) => {
+                    {props.bands.bands.bands.map((band, i) => {
                         return (
-                            <Link  key={i} to={`bands/${band.band_id}`}>
+                            <Link  key={i} to={`bands/${band.id}`}>
                                 <BandBox key={i} band={band}/>
                             </Link>
                         )

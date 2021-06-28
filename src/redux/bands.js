@@ -3,21 +3,22 @@ import * as ActionTypes from './ActionTypes';
 
 // band remover from local state
 function removeBand(list, band) {
-    const newList = list.filter(item => item.email !== band.email)
+    
+    const newList = list.filter(item => item.id !== band.id)
     return newList
  }
 
 
-export const bands = (state = {isLoading: true, errMess: null, bands: []}, action) => {
+export const bands = (state = {isLoading: true, errMess: null, bands: null}, action) => {
     switch (action.type) {
         case ActionTypes.BANDS_LOADING: 
-            return {...state, isLoading: true, errMess: null, bands: []}
+            return {...state, isLoading: true, errMess: null, bands: null}
         case ActionTypes.BANDS_FAILED: 
             return {...state, isLoading: true, errMess: action.payload}
         case ActionTypes.ADD_BANDS: 
             return {...state, isLoading: false, errMess: null, bands: action.payload}
         case ActionTypes.ADD_NEW_BAND: 
-            return {...state, bands: state.bands.push(action.payload)}
+            return {...state, bands: state.bands.concat(action.payload)}
         case ActionTypes.DELETE_BAND: 
             return {...state, bands: removeBand(state.bands, action.payload)}
         default:

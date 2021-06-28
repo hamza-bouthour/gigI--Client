@@ -18,12 +18,12 @@ const mapStateToProps = (bands, user) =>{
     }
 }
 const Main = (props) => {
-    const BandInfo = ({band}) => {
+    const BandInfo = ({match}) => {
         return (
             <div className="container mt-5">
                 <div className="row">
                     <div className="col-12">
-                        <BandBox band={props.bands.bands.bands.data.filter(band => band.band_id === band.band_id)[0]}/>
+                        <BandBox band={props.bands.bands.bands.filter(band => band.id === +match.params.bandId)[0]}/>
 
                     </div>
                 </div>

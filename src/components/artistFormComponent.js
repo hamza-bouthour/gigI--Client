@@ -80,7 +80,6 @@ const ArtistForm = props => {
             sound,
             image
         }
-   
         fetchNewBand(data);
   
     

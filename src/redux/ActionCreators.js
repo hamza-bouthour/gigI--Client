@@ -24,7 +24,7 @@ export const fetchBands = () => dispatch => {
         })
         
         .then(response => response.json())
-        .then(response => dispatch(addBands(response)))
+        .then(response => dispatch(addBands(response.data)))
         .then(response => console.log(response))
         .catch((error) => {
             new Error(error.message)
@@ -93,14 +93,15 @@ export const searchBand = data => dispatch => {
 
 }
 export const fetchDeleteBand = (band) => dispatch => {
-    fetch(`${urls.bandsUrl}/${band.band_id}`, {
+    dispatch(deleteBand(band))
+    fetch(`${urls.bandsUrl}/${band.id}`, {
                 method: 'DELETE', 
                 body: JSON.stringify(band),
                 headers: {
                     "Content-type": "application/json; charset=UTF-8"
                 }
             })
-            .then(response => dispatch(deleteBand(band)))
+
             .then(response => console.log(response))
             .catch((error) => {
             console.error('Error:', error);

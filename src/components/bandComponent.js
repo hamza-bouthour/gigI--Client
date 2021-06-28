@@ -23,7 +23,7 @@ const BandBox = props => {
 
 
                 <div className="media p-2 m-3 band-box" style={{border: `solid 1px ${boxBtns}`}} onMouseOver={() => adjustBorders('rgb(2, 234, 241)')} onPointerOut={() => adjustBorders('rgb(37, 118, 121)')}>
-                    <img src={band.image} style={{width: 200, borderRadius: 5, filter: 'drop-shadow(2px 1px 8px #000)'}} />
+
                     <div className="ml-4 text-align ">
                         <div className="row mb-4">
                             <h2 className="col-6 col-md-4">{band.name.toUpperCase()}</h2>
@@ -56,3 +56,6 @@ const BandBox = props => {
     )
 }
 export default connect(mapStateToProps, mapDispatchToProps)(BandBox);
+
+
+                    // <img src={band.image} style={{width: 200, borderRadius: 5, filter: 'drop-shadow(2px 1px 8px #000)'}} />

@@ -33,11 +33,11 @@ const SearchBar = props => {
                 onChange={(e) => setQuery(e.target.value)}
             />
             <div className="col-2">
-            <Link to="/bands">
+      
                 <input type="submit"  id="home-search-btn" 
                     onClick={() => searchClick()}
                 />
-            </Link>
+     
             </div>
     </form>
     )

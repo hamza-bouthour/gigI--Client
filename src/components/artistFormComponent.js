@@ -57,7 +57,7 @@ const ArtistForm = props => {
                     setTimeout(() => {
                         enableLoading(false)
                         enableSubscribe(true)
-                    }, 3000)
+                    }, 2000)
                     
                 }
             })

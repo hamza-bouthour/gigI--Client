@@ -34,9 +34,7 @@ const dataExample =[
 const Home = props => {
     const [bandFormDisplay, setBandFormDisplay] = useState('none');
     const [recruiterFromDisplay, setRecFormDisplay] = useState('none');
-    useEffect(() => {
-        props.fetchBands()
-    },[])
+
     return (
         <div style={{padding: 5}}>
             <div className="jumbotron jumbotron-header mx-auto mt-5 mt-md-2">

@@ -33,7 +33,9 @@ function addStyle (band) {
 function BandList(props) {
     const [bands, getData] = useState([]);
     
- 
+    useEffect(() => {
+        !props.bands.bands.searchBands ?  props.fetchBands() : getData(props.bands.bands.searchBands)
+    },[])
 
         if (props.bands.bands.isLoading) {
             return (
@@ -49,7 +51,7 @@ function BandList(props) {
             <div className="container">
                 <h2>BandList</h2>
                 <div >
-                    {props.bands.bands.bands.map((band, i) => {
+                    {bands.map((band, i) => {
                         return (
                             <Link  key={i} to={`bands/${band.id}`}>
                                 <BandBox key={i} band={band}/>

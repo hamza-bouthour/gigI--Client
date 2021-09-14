@@ -32,10 +32,23 @@ function addStyle (band) {
 
 function BandList(props) {
     const [bands, getData] = useState([]);
+    const [photos, getPhotos] = useState([]);
     
     useEffect(() => {
-        !props.bands.bands.searchBands ?  props.fetchBands() : getData(props.bands.bands.searchBands)
-    },[])
+        if (props.bands.bands.searchBands.length == 0) {
+            
+            // console.log(props.bands.bands.bands)
+             getData(props.bands.bands.bands)
+             getPhotos(props.bands.bands.photos)
+            console.log(bands)
+
+        }
+         else {
+             getData(props.bands.bands.searchBands)
+             console.log(bands)
+            }
+       
+},[bands])
 
         if (props.bands.bands.isLoading) {
             return (
@@ -53,9 +66,15 @@ function BandList(props) {
                 <div >
                     {bands.map((band, i) => {
                         return (
-                            <Link  key={i} to={`bands/${band.id}`}>
+                            <Link  key={i} to={`bands/${band.band_id}`}>
                                 <BandBox key={i} band={band}/>
                             </Link>
+                        )
+                    })}
+                    {photos.map(p => {
+                        return (
+                            // <img src="" />
+                            <h1>img</h1>
                         )
                     })}
                 </div>

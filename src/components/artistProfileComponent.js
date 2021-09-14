@@ -32,6 +32,7 @@ const Profile = props => {
     const [formControl, setControl] = useState(true);
     const [placeHolder, setPlaceHolder] = useState('input-profile-disable');
     const [subscriber, setSebscriber] = useState(null);
+    const [file, uploadFile] = useState(null);
     useEffect(() => {
         
         setSebscriber(props.bands.user.user);
@@ -85,8 +86,16 @@ const Profile = props => {
     
     return (
         <div style={{display: props.displayBandForm}} className="container mt-5 p-5">
-
-            <Form>
+        <form enctype="multipart/form-data" action="http://192.168.1.82:3001/upload" method="post">
+                    <div>
+                        <input type="file" name="image" 
+                            onChange={(e) => uploadFile(e.target.files[0])}
+                        />
+                        <input type="text" />
+                        <button type="submit" >Submit</button>
+                    </div>
+            </form>
+            {/* <Form>
                 <Row>
                 </Row>
                 <fieldset disabled={formControl}>
@@ -209,7 +218,7 @@ const Profile = props => {
                     </Button>
 
 
-                </Row>
+                </Row> */}
         </div>
     )}
 }

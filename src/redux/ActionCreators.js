@@ -1,5 +1,6 @@
 import * as ActionTypes from './ActionTypes';
 import urls from '../config';
+import { push } from 'react-router-redux'
 
 
 // bands reducer actions
@@ -10,10 +11,16 @@ export const bandsFailed = errMess => ({
     type: ActionTypes.BANDS_FAILED,
     payload: errMess
 });
-export const addBands = data => ({
+export const addBands = (data, photos) => ({
     type: ActionTypes.ADD_BANDS,
-    payload: data
+    bands: data,
+    photos: photos
 });
+// export const addPhotos = (data, photos) => ({
+//     type: ActionTypes.ADD_PHOTOS,
+//     bands: data,
+//     photos: photos
+// })
 export const fetchBands = () => dispatch => {
     dispatch(bandsLoading())
    return fetch(urls.bandsUrl, {
@@ -24,8 +31,10 @@ export const fetchBands = () => dispatch => {
         })
         
         .then(response => response.json())
-        .then(response => dispatch(addBands(response.data)))
-        .then(response => console.log(response))
+        // .then(response => console.log(response))
+        .then(response => dispatch(addBands(response.bands.data, response.photos.data)))
+        // .then(response => dispatch(addPhotos(response.photos.data[0])))
+        .then(response => console.log('resoibse' + response))
         .catch((error) => {
             new Error(error.message)
     });
@@ -36,8 +45,6 @@ export const searchBand = (data) => ({
 
 })
 export const fetchQueryBands = (data) => dispatch => {
-    // console.log(JSON.stringify(data))
-    // dispatch(bandsLoading())
     fetch(urls.searchUrl, {
         method: 'POST', 
         body: JSON.stringify(data),
@@ -97,7 +104,7 @@ export const editBand = (data) => dispatch => ({
 export const fetchDeleteBand = (band) => dispatch => {
     // console.log(JSON.stringify(band))
     dispatch(deleteBand(band))
-    fetch(`${urls.bandsUrl}/${band.id}`, {
+    fetch(`${urls.bandsUrl}/${band.band_id}`, {
                 method: 'DELETE', 
                 body: JSON.stringify(band),
                 headers: {

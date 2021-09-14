@@ -67,7 +67,6 @@ const Header = (props) => {
                     </Link>
 
                 </div>
-                
             </Navbar>
         </div>
     )

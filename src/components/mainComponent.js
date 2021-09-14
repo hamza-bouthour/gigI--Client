@@ -23,7 +23,7 @@ const Main = (props) => {
             <div className="container mt-5">
                 <div className="row">
                     <div className="col-12">
-                        <BandBox band={props.bands.bands.bands.filter(band => band.id === +match.params.bandId)[0]}/>
+                        <BandBox band={props.bands.bands.bands.filter(band => band.band_id === +match.params.bandId)[0]}/>
 
                     </div>
                 </div>
@@ -33,6 +33,7 @@ const Main = (props) => {
      
     return (
         <div>
+            <img className="col-12 photo-header" src="https://i.postimg.cc/6pQK83fQ/cover-Header.jpg" />
            <Header />
            <Switch>
                 <Route exact path='/home' component={Home} />

@@ -9,20 +9,22 @@ function removeBand(list, band) {
  }
 
 
-export const bands = (state = {isLoading: true, errMess: null, bands: null, searchBands: null}, action) => {
+export const bands = (state = {isLoading: true, errMess: null, bands: [], searchBands: [], photos: ''}, action) => {
     switch (action.type) {
         case ActionTypes.BANDS_LOADING: 
             return {...state, isLoading: true, errMess: null, bands: null}
         case ActionTypes.BANDS_FAILED: 
             return {...state, isLoading: true, errMess: action.payload}
         case ActionTypes.ADD_BANDS: 
-            return {...state, isLoading: false, errMess: null, bands: action.payload}
+            return {...state, isLoading: false, errMess: null, bands: action.bands, photos: action.photos}
         case ActionTypes.ADD_NEW_BAND: 
             return {...state, bands: state.bands.concat(action.payload)}
         case ActionTypes.DELETE_BAND: 
             return {...state, bands: removeBand(state.bands, action.payload)}
         case ActionTypes.SEARCH_BAND: 
             return {...state, searchBands: action.payload}
+        case ActionTypes.ADD_PHOTOS: 
+            return {...state, photos: action.payload}
         default:
             return state;
     }

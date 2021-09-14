@@ -78,9 +78,10 @@ const ArtistForm = props => {
             city,
             zipcode,
             sound,
-            image
+            // image
         }
         fetchNewBand(data);
+        console.log(data);
   
     
 }
@@ -107,7 +108,7 @@ const ArtistForm = props => {
 
     return (
         <div style={{display: props.displayBandForm}} className="band-form">
-            <Form>
+            <Form encType="multipart/form-data" method="post">
                 <Row form>
                     <Col md={6}>
                         <FormGroup>
@@ -214,6 +215,7 @@ const ArtistForm = props => {
                         id="namdFormSubmit-btn"
                         className="form-submit-btn"
                         onClick={() => handleClick()}
+                        value="upload"
                     >
                         Submit
                     </Button>    

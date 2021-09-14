@@ -33,7 +33,7 @@ const Main = (props) => {
      
     return (
         <div>
-            <img className="col-12 photo-header" src="https://i.postimg.cc/6pQK83fQ/cover-Header.jpg" />
+            
            <Header />
            <Switch>
                 <Route exact path='/home' component={Home} />

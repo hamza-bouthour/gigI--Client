@@ -52,11 +52,9 @@ const Home = props => {
 
     return (
         <div>
+            <img className="col-12 m-0 photo-header" src="https://i.postimg.cc/fb7Hc7Kj/clem-onojeghuo-fxt2d5-Dqifk-unsplash.jpg" />
             <div className="container-fluid wrapper-header p-0">
                 <div className="row ">
-                    {/* <img className="col-12 m-0 photo-header" src="https://i.postimg.cc/fb7Hc7Kj/clem-onojeghuo-fxt2d5-Dqifk-unsplash.jpg" /> */}
-                    
-
                 </div>
             </div>
          
@@ -118,15 +116,49 @@ const Home = props => {
                     <div className="container">
                         <Row className="my-5">
                             <Col md={8}  className="home-band-box">
-                                <h6 className="mb-1">Lanty</h6>
+                                <h5 className="mb-1">Lanty</h5>
                                 <img  style={{borderRadius: "5px", marginBottom: "5px"}} src="https://i.postimg.cc/K8hYYVGY/photos-by-lanty-O38-Id-cy-V4-M-unsplash.jpg"/>
-                                <div className="band-box-links">
+                                <div className="band-box-bottom">
                                     <p>Photos by Lanty</p>
-                                    <Link className="band-box-link">
-                                        Browse photographers
-                                    </Link>
+                                    <div className="band-box-links">
+                                        <Link className="band-box-link">
+                                            Check Lanty
+                                        </Link>
+                                        <Link className="band-box-link">
+                                            Browse photographers
+                                        </Link>
+                                    </div>
                                 </div>
-                                <img  style={{borderRadius: "5px"}} className="artist-secondary-photo-top" src="https://i.postimg.cc/K8hYYVGY/photos-by-lanty-O38-Id-cy-V4-M-unsplash.jpg"/>
+                                <img  style={{borderRadius: "5px"}} className="artist-secondary-photo-top" src="https://i.postimg.cc/zBK8gvCc/shardayyy-photography-f-Jzm-Pe-a0e-U-unsplash.jpg"/>
+                            </Col>
+                            <Col md={4} className="home-comment-container">
+                            {dataExample.map((ex, i) => {
+                                return (
+                                    <CommentHome key={i} userComment={ex}/>
+                                )
+                            })}
+                            </Col>
+                        
+                        </Row>
+                    </div>
+                        <img className="col-12 photo-header" src="https://i.postimg.cc/LXzZvHkJ/livemusic-1-1.jpg"/>
+                    <div className="container">
+                        <Row className="my-5">
+                            <Col md={8}  className="home-band-box">
+                                <h5 className="mb-1">Land-free</h5>
+                                <img  style={{borderRadius: "5px", marginBottom: "5px"}} src="https://i.postimg.cc/1X0mLX4q/Home-Band1.jpg"/>
+                                <div className="band-box-bottom">
+                                    <p>Folk music</p>
+                                    <div className="band-box-links">
+                                        <Link className="band-box-link">
+                                            Check Land-free
+                                        </Link>
+                                        <Link className="band-box-link">
+                                            Browse bands
+                                        </Link>
+                                    </div>
+                                </div>
+                                <img  style={{borderRadius: "5px"}} className="artist-secondary-photo-top" src="https://i.postimg.cc/xTy8Zxb4/band3.jpg"/>
                             </Col>
                             <Col md={4} className="home-comment-container">
                             {dataExample.map((ex, i) => {

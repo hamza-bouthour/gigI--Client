@@ -8,15 +8,13 @@ import { Button, Form, FormGroup, Label, Input, FormText, Col, Row } from 'react
 import { fetchBands } from '../redux/ActionCreators';
 import MusicNoteIcon from '@material-ui/icons/MusicNote';
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
-import { styled } from '@material-ui/styles';
+
 import { Link } from 'react-router-dom';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import GitHubIcon from '@material-ui/icons/GitHub';
 
 
-const myMusicNoteIcon = styled(MusicNoteIcon)({
-    color: 'white',
-});
+
 
 const mapDispatchToProps = {
     fetchBands,

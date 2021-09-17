@@ -25,7 +25,7 @@ const Test = props => {
     useEffect(() => {
         const fetchBandMembers = async (id) => {
 
-             const members = await fetch(`http://192.168.1.82:3001/bands/${id}`, {
+             const members = await fetch(`https://gigitv2.herokuapp.com/bands/${id}`, {
                   method: 'GET', 
                   headers: {
                       "Content-type": "application/json; charset=UTF-8"
@@ -39,7 +39,7 @@ const Test = props => {
           setbandMembers(members)
           }
 
-        fetchBandMembers(band.bandId);
+        fetchBandMembers(5);
     }, [])
 
     if(bandMembers.data) {
@@ -52,7 +52,7 @@ const Test = props => {
                             console.log(member)
                             return (
                                 <div className="card col-6 member-box" style={{width: "18rem;"}}>
-                                    <img className="card-img-top" src={`http://localhost:3001/${member.image}`} alt="Card image cap" />
+                                    <img className="card-img-top" src={`https://gigitv2.herokuapp.com/${member.image}`} alt="Card image cap" />
                                     <div className="card-body p-2">
                                         <h5 className="member-name">{member.artistname} <span >{member.instrument}</span></h5>
                 

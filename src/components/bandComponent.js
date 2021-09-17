@@ -34,7 +34,7 @@ const BandBox = props => {
                 <Row className="my-5 p-2">
                     <Col md={8}  className="band-box">
                         <h3 className="mb-1 band-box-name">{capitalize(band.name)}</h3>
-                        <img  className="band-box-photo" style={{borderRadius: "5px", marginBottom: "5px"}} src={`http://localhost:3001/${band.image }`}/>
+                        <img  className="band-box-photo" style={{borderRadius: "5px", marginBottom: "5px"}} src={`https://gigitv2.herokuapp.com/${band.image}`}/>
                         <div className="band-box-bottom">
                             <div className="band-box-buttons">
                                 <Link to={`bands/${band.bandId}`}>

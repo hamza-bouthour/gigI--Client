@@ -7,6 +7,9 @@ import Profile from './artistProfileComponent';
 import BandBox from './bandComponent';
 import { Switch, Route, Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';
+import ArtistForm from './artistFormComponent';
+import RecruiterForm from './guestFromComponent';
+import Test from './testComponent';
 
 // const mapDispatchToProps = {
 //     fetchBands
@@ -23,8 +26,7 @@ const Main = (props) => {
             <div className="container mt-5">
                 <div className="row">
                     <div className="col-12">
-                        <BandBox band={props.bands.bands.bands.filter(band => band.band_id === +match.params.bandId)[0]}/>
-
+                        <Test band={props.bands.bands.bands.filter(band => band.bandId === +match.params.bandId)[0]}/>
                     </div>
                 </div>
             </div>
@@ -40,6 +42,8 @@ const Main = (props) => {
                 <Route exact path='/bands' component={BandList} />
                 <Route path='/bands/:bandId' component={BandInfo} />
                 <Route exact path='/profile' component={Profile} />
+                <Route exact path="/artists" component={ArtistForm} />
+                <Route exact path="/guests" component={RecruiterForm} />
                 <Route exact path="/login">
                     {props.bands.user.loggedIn ? <Redirect to="/profile" /> : <Login />}
                 </Route>

@@ -11,11 +11,20 @@ export const bandsFailed = errMess => ({
     type: ActionTypes.BANDS_FAILED,
     payload: errMess
 });
-export const addBands = (data, photos) => ({
+export const addBands = data => ({
     type: ActionTypes.ADD_BANDS,
-    bands: data,
-    photos: photos
+    payload: data
 });
+export const addBandMembers = data => ({
+    type: ActionTypes.ADD_BAND_MEMBERS,
+    payload: data,
+   
+});
+export const addBand = (data) => ({
+    type: ActionTypes.ADD_BAND,
+    payload: data,
+    // band: band
+})
 // export const addPhotos = (data, photos) => ({
 //     type: ActionTypes.ADD_PHOTOS,
 //     bands: data,
@@ -29,16 +38,20 @@ export const fetchBands = () => dispatch => {
             "Content-type": "application/json; charset=UTF-8"
         }
         })
-        
         .then(response => response.json())
         // .then(response => console.log(response))
-        .then(response => dispatch(addBands(response.bands.data, response.photos.data)))
+        .then(response => dispatch(addBands(response.data)))
         // .then(response => dispatch(addPhotos(response.photos.data[0])))
-        .then(response => console.log('resoibse' + response))
+
         .catch((error) => {
             new Error(error.message)
     });
 }
+
+
+
+
+
 export const searchBand = (data) => ({
     type: ActionTypes.SEARCH_BAND,
     payload: data
@@ -61,14 +74,14 @@ export const fetchQueryBands = (data) => dispatch => {
 }
 
 export const addNewBand = data => {
-    console.log(data)
+    // console.log(data)
 return {
     type: ActionTypes.ADD_NEW_BAND,
     payload: data
 }
 }
 export const addNewUser = data => {
-    console.log('new USER')
+    // console.log('new USER')
     return {
         type: ActionTypes.ADD_NEW_USER,
         payload: data
@@ -84,7 +97,7 @@ export const fetchNewGuest= (data) => dispatch => {
                 "Content-type": "application/json; charset=UTF-8"
             }
         })
-        .then(response => console.log(response))
+        // .then(response => console.log(response))
         .catch((error) => {
         console.error('Error:', error);
     });
@@ -112,7 +125,7 @@ export const fetchDeleteBand = (band) => dispatch => {
                 }
             })
 
-            .then(response => console.log(response))
+            // .then(response => console.log(response))
             .catch((error) => {
             console.error('Error:', error);
         });

@@ -20,6 +20,7 @@ const myMusicNoteIcon = styled(MusicNoteIcon)({
 
 const mapDispatchToProps = {
     fetchBands,
+ 
     
 }
 const mapStateToProps = (bands, user) =>{
@@ -48,55 +49,31 @@ const Home = props => {
 
     useEffect(() => {
         props.fetchBands();
+
     }, [])
 
     return (
         <div>
-            <img className="col-12 m-0 photo-header" src="https://i.postimg.cc/fb7Hc7Kj/clem-onojeghuo-fxt2d5-Dqifk-unsplash.jpg" />
+            <img className="col-12 m-0 photo-header" src="https://i.postimg.cc/Dzs18QNk/cover-Header.jpg" />
             <div className="container-fluid wrapper-header p-0">
                 <div className="row ">
                 </div>
             </div>
          
-            <div className="form-container">
+            {/* <div className="form-container">
                 <ArtistFrom displayBandForm={bandFormDisplay}/>
                 <RecruiterForm displayRecruiterForm={recruiterFromDisplay} />
-            </div>
+            </div> */}
             <div className="container-fluid p-0">
                     <div className="row justify-content-center my-5">
-                        <div className="mx-5 link-form" 
-                            onClick={() => {
-                            // recruiterFromDisplay === 'none' && (bandFormDisplay === 'block' || 'none') ?  setRecFormDisplay('block') : setRecFormDisplay('none');
-                            if (recruiterFromDisplay === 'none' && bandFormDisplay === 'block') {
-                                setBandFormDisplay('none');
-                                setRecFormDisplay('block');
-                            }
-                            if (recruiterFromDisplay === 'none') {
-                                setRecFormDisplay('block');
-                            }
-                            else
-                            setRecFormDisplay('none');
-                                }}
-                        >
+                        <Link className=" mx-5 link-form" to="/guests">
                             <MusicNoteIcon className="icon-link" style={{color: "#023E7D"}}/>
                             <p>Hire talent</p>
-                        </div>
-                        <div className="mx-5 link-form"
-                           onClick={() => {
-                            // bandFormDisplay === 'none' ? setBandFormDisplay('block') : setBandFormDisplay('none')
-                            if (bandFormDisplay === 'none' && recruiterFromDisplay === 'block') {
-                                setBandFormDisplay('black');
-                                setRecFormDisplay('none');
-                            }
-                            if (bandFormDisplay === 'none') {
-                                setBandFormDisplay('block');
-                            }
-                            else
-                            setBandFormDisplay('none');    
-                        }}>
+                        </Link>
+                        <Link className="mx-5 link-form" to="/artists">
                             <PlayCircleFilledIcon className="icon-link" style={{color: "#023E7D"}}/>
                             <p>New Artist</p>
-                        </div>
+                        </Link>                 
                         <Link className="mx-5 link-form">
                             <LinkedInIcon className="icon-link" style={{color: "#023E7D"}}/>
                             <p>LinkedIn</p>
@@ -106,9 +83,6 @@ const Home = props => {
                             <p>Repository</p>
                         </Link>
                         
-                    </div>
-                    <div className="">  
-                        <SearchBar />
                     </div>
                    
                         <img className="col-12 photo-header" src="https://i.postimg.cc/dQn34njH/andreas-ronningen-S2-Yss-Lw97l4-unsplash-1-1.jpg" />

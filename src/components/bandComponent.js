@@ -1,62 +1,79 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchBands, fetchDeleteBand } from '../redux/ActionCreators';
+import { fetchBands } from '../redux/ActionCreators';
+import { Col, Row } from 'reactstrap';
+
 const mapDispatchToProps = {
     fetchBands,
-    fetchDeleteBand
+ 
+    
 }
-const mapStateToProps = (bands, user) =>{
+const mapStateToProps = (bands, user, band) =>{
     return {
         bands,
-        user
+        user,
+        // band
     }
 }
+
+function capitalize(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+
+
+
 const BandBox = props => {
 
-    
     const {band} = props
-  
     const [boxBtns, adjustBorders] = useState('teal');
+
     return (
-            
+                <Row className="my-5 p-2">
+                    <Col md={8}  className="band-box">
+                        <h3 className="mb-1 band-box-name">{capitalize(band.name)}</h3>
+                        <img  className="band-box-photo" style={{borderRadius: "5px", marginBottom: "5px"}} src={`http://localhost:3001/${band.image }`}/>
+                        <div className="band-box-bottom">
+                            <div className="band-box-buttons">
+                                <Link to={`bands/${band.bandId}`}>
+                                    <button className="btn-band-box"><i className="fa fa-1x fa-id-badge mr-1"></i>Profile</button>
+                                </Link>
+                                <Link to={`bands/${band.bandId}`}>
+                                    <button className="btn-band-box"><i class="fa fa-1x fa-address-book mr-1"></i>Reserve</button>
+                                </Link>
+                                <button className="btn-band-box"><i className="fa fa-1x fa-star mr-1"></i>Add to favorites</button>
+                                <button className="btn-band-box"><i className="fa fa-1x fa-dollar-sign"></i></button>
 
-
-                <div className="media p-2 m-3 band-box" style={{background: `url(http://localhost:3001/${band.image })`, backgroundSize: "100%"}} onMouseOver={() => adjustBorders('rgb(2, 234, 241)')} onPointerOut={() => adjustBorders('rgb(37, 118, 121)')}>
-                    {/* <img src={`http://localhost:3001/${band.image }`} /> */}
-                    <div className="ml-4 text-align ">
-                        <div className="row mb-4">
-                            <h2 className="col-6 col-md-4">{band.name.toUpperCase()}</h2>
-                            <div className="col-md-2 col-12 band-style-container offset-lg-6 ">
-
-                                {band.style}
-                            </div>
-
-                        </div>
-                        <p>{band.description}</p>
-
-                        <div className="row">
-
-                            <div className="band-location-container col-md-6 col-6" >{band.city.toUpperCase()}<span style={{marginLeft: 20, marginRight: 4}}>{band.state}</span><span>{band.zipcode}</span></div>
-                        </div>
-                    
-                        <div className="flex-row-start" style={{position: 'absolute', bottom: '6px', right:0}}>
-                            <div className="flex-row-start" >
-                                <button className="btn-band-box" style={{border: `solid 1px ${boxBtns}`}}><i className="fa fa-1x fa-id-badge mr-1"></i>Profile</button>
-                                <button className="btn-band-box" style={{border: `solid 1px ${boxBtns}`}}><i className="fa fa-1x fa-star mr-1"></i>Favorite</button>
-
-                                <button className="btn-band-box" style={{border: `solid 1px ${boxBtns}`}} onClick={() => props.fetchDeleteBand(band)}><Link to="/bands">Delete</Link></button>
-                                <button disabled className="btn-band-box" style={{backgroundColor: "rgb(35, 62, 63)", border: "none"}}><i class="fa fa-1x fa-address-book mr-1"></i>Book</button>
                             </div>
                         </div>
-                    </div>
-                    
-                </div>
+                        <div className="band-box-description-wrapper">
+                            <p className="band-box-description">{band.description}</p>
+                        </div>
+                    </Col>
+                    <Col className="band-details-container">
+                        <h5>{band.city}</h5>
+                        <ul className="band-details">
+                            <li>{band.style}</li>
+                            <li>{band.eventype.replace(/[',]+/g, '')}</li>
+                            <li>${band.cost}</li>
+                            <hr />
+                            <li>{band.country}</li>
+                            <li>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked={band.sound === 0 ? false : true} />
+                                    <label class="form-check-label" for="flexSwitchCheckChecked">Sound system</label>
+                                </div>
+                            </li>
+                        </ul>
+                    </Col>
+                </Row>
            
     )
 }
 export default connect(mapStateToProps, mapDispatchToProps)(BandBox);
 
+ 
 
-                    // <img src={band.image} style={{width: 200, borderRadius: 5, filter: 'drop-shadow(2px 1px 8px #000)'}} />
+

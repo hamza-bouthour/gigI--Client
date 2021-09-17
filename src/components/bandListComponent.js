@@ -4,9 +4,11 @@ import { Link } from 'react-router-dom';
 import { fetchBands, deleteBand } from '../redux/ActionCreators';
 import Loading from './LoadingComponent';
 import BandBox from './bandComponent';
+import BandsNavigation from './bandsNavigation';
+import SearchBar from './searchBarHomeComponent';
 
 const mapDispatchToProps = {
-    fetchBands,
+    // fetchBands,
     deleteBand
 }
 const mapStateToProps = (bands, user) =>{
@@ -36,8 +38,6 @@ function BandList(props) {
     
     useEffect(() => {
         if (props.bands.bands.searchBands.length == 0) {
-            
-            // console.log(props.bands.bands.bands)
              getData(props.bands.bands.bands)
              getPhotos(props.bands.bands.photos)
             console.log(bands)
@@ -45,7 +45,7 @@ function BandList(props) {
         }
          else {
              getData(props.bands.bands.searchBands)
-             console.log(bands)
+             console.log(bands + 'bands')
             }
        
 },[bands])
@@ -61,22 +61,26 @@ function BandList(props) {
             )
         }
         return ( 
-            <div className="container">
-                <h2>BandList</h2>
-                <div >
-                    {bands.map((band, i) => {
-                        return (
-                            <Link  key={i} to={`bands/${band.band_id}`}>
-                                <BandBox key={i} band={band}/>
-                            </Link>
-                        )
-                    })}
-                    {photos.map(p => {
-                        return (
-                            // <img src="" />
-                            <h1>img</h1>
-                        )
-                    })}
+            <div>
+                <img className="col-12 m-0 photo-header" src="https://i.postimg.cc/BQTqRVyK/music-hq-Cknyec2-Rnr-E-unsplash-1-1.jpg" />
+                    <BandsNavigation />
+                    <SearchBar />
+                <div className="container">
+                    <div className="bands-container">
+                        {bands.map((band, i) => {
+                
+                            return (
+                                    <BandBox key={i} band={band}/>
+
+                            )
+                        })}
+                        {/* {photos.map(p => {
+                            return (
+                                // <img src="" />
+                                <h1>img</h1>
+                            )
+                        })} */}
+                    </div>
                 </div>
             </div>
         )

@@ -16,7 +16,7 @@ export const bands = (state = {isLoading: true, errMess: null, bands: [], search
         case ActionTypes.BANDS_FAILED: 
             return {...state, isLoading: true, errMess: action.payload}
         case ActionTypes.ADD_BANDS: 
-            return {...state, isLoading: false, errMess: null, bands: action.bands, photos: action.photos}
+            return {...state, isLoading: false, errMess: null, bands: action.payload}
         case ActionTypes.ADD_NEW_BAND: 
             return {...state, bands: state.bands.concat(action.payload)}
         case ActionTypes.DELETE_BAND: 

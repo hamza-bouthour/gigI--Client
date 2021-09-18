@@ -44,27 +44,16 @@ const ArtistForm = props => {
     const [bandMembers, setBandMembers] = useState([0]);
     const [displayForm, setFormDisplay] = useState('part1');
     const [file, uploadFile] = useState(null);
-    const id = 2;
+    const [cost, setCost] = useState(0);
+    const [eventype, setEventype] = useState('');
+    const [membersInstrument, setMembersInstruments] = useState([]);
+    const [membersName, setMembersName] = useState([]);
+    const [bandId, setBandId] = useState('');
+    
 
-    function handleClick() {
-        const data ={
-           file,
-           id
-           
-        }
-        console.log(data)
-    }
 
-    const formLineUp = (props) => {
-        return (
-            <>
-                
-            </>
-        )
-    }
-    const formUploadPhoto = () => {
 
-    }
+
 
     const addMember = (number) => {
         let i = 0;
@@ -77,9 +66,6 @@ const ArtistForm = props => {
     }
 
     const fetchNewBand = data => {
-        props.addNewBand(data);
-        props.addNewUser(data)
-        enableLoading(true);
         fetch(urls.bandsUrl, {
             method: 'POST', 
             body: JSON.stringify(data),
@@ -88,22 +74,27 @@ const ArtistForm = props => {
             }
             })
             .then(response => response.json())
-            .then(response => {console.log(response)})
-            .then(response => {
-                    {
-                    setTimeout(() => {
-                        enableLoading(false)
-                        enableSubscribe(true)
-                    }, 2000)
-                    
-                }
-            })
+            .then(response => setBandId(response.data[0].bandId))
             .catch((error) => {
             console.error('Error:', error);
         });
-       
     }
-   function handleClick() {
+    const addMembersToBand = (member, bandId) => {
+
+        fetch(urls.bandsUrl, {
+            method: 'POST', 
+            body: JSON.stringify(member),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+            })
+            .then(response => response.json())
+            .then(response => setBandId(response.data[0].bandId))
+            .catch((error) => {
+            console.error('Error:', error);
+        });
+    }
+   function handleClickForm1() {
         const data = {
             email,
             password,
@@ -115,217 +106,297 @@ const ArtistForm = props => {
             city,
             zipcode,
             sound,
-            // image
+            image: '',
+            cost,
+            eventype
         }
-        fetchNewBand(data);
-        console.log(data);
-  
-    
+        console.log(data)
+        fetchNewBand(data)  
 }
-    if (loading) {
-        return (
-            <Loading />
-        )
+async function handleClickform2() {
+    let membersList = [];
+    for (let i = 0; i < membersName.length; i++) {
+        let obj = {}
+        obj['name'] = membersName[i];
+        obj['instrument'] = membersInstrument[i];
+        membersList.push(obj)
     }
-    if (subscribed) {
-        return (
-            <div className="container my-5"> 
-                <div className="row">
-                    <h3 className="mx-auto">Account successfully Created!</h3>
-                </div>
-                <div className="row my-3">
-                    <div className="mx-auto">
-                        <Link to="/bands" className="button-form-center">Bands</Link>
-                        <Link to="/profile" className="button-form-center">Profile</Link> 
-                    </div>
-                </div>
-            </div>
-        )
+    // return membersList;
+    // console.log(membersList)
+    let data = {
+        list: membersList,
+        id: bandId
     }
+    fetch(urls.bandMemberUrl, {
+        method: 'POST', 
+        body: JSON.stringify(data),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+        })
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch((error) => {
+        console.error('Error:', error);
+    });
+}
+
+function handleClickform3() {
+    const data ={
+        file: JSON.stringify(file),
+        bandId
+        
+     }
+    fetch('http://192.168.1.82:3001/upload', {
+        method: 'POST', 
+        body: JSON.stringify({id: bandId}),
+        headers: {
+            "Content-type": "multipart/form-data; boundary=<calculated when request is sent>",       
+        }
+    })
+        .then(response => response.json())
+        .catch((error) => {
+        console.error('Error:', error);
+    });
+}
+
+
+    // if (loading) {
+    //     return (
+    //         <Loading />
+    //     )
+    // }
+    // if (subscribed) {
+    //     return (
+    //         <div className="container my-5"> 
+    //             <div className="row">
+    //                 <h3 className="mx-auto">Account successfully Created!</h3>
+    //             </div>
+    //             <div className="row my-3">
+    //                 <div className="mx-auto">
+    //                     <Link to="/bands" className="button-form-center">Bands</Link>
+    //                     <Link to="/profile" className="button-form-center">Profile</Link> 
+    //                 </div>
+    //             </div>
+    //         </div>
+    //     )
+    // }
 
     return (
         <>
-            <Header />
-            <div className="container artist-form-container">
-                <div style={{display: props.displayBandForm}} className="band-form">
-                    <Form encType="multipart/form-data" method="post">
-                        <Row form style={{display: displayForm === 'part1' ? "flex" : "none"}}>
-                            <Col md={6}>
-                                <FormGroup>
-                                    <Label htmlFor="emailIn">Email</Label>
-                                    <Input type="text" name="email" id="emailIn" placeholder="band@gigit.com"
-                                        onChange={(e) => setEmail(e.target.value)}
-                                    />
-                                </FormGroup>
+        {/* <Header /> */}
+        <img className="col-12 m-0 photo-header" src="https://i.postimg.cc/026tQ8XS/bands-Component-Header.jpg" />
+        <div className="container my-5 artist-form-container">
+            <div style={{display: props.displayBandForm}} className="band-form">
+                <Form>
+                    <Row form style={{display: displayForm === 'part1' ? "flex" : "none"}}>
+                        <Col md={6}>
+                            <FormGroup>
+                                <Label htmlFor="emailIn">Email</Label>
+                                <Input type="text" name="email" id="emailIn" placeholder="band@gigit.com"
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
+                            </FormGroup>
 
-                            </Col>
-                            <Col md={6}>
-                                <FormGroup>
-                                    <Label htmlFor="pswIn">Password</Label>
-                                    <Input type="text" name="pswIn" id="pswIn" placeholder="at least 5 caracters" 
-                                        onChange={(e) => setPassword(e.target.value)}
-                                    />
-                                </FormGroup>
-                            </Col>
-                        </Row>
+                        </Col>
+                        <Col md={6}>
+                            <FormGroup>
+                                <Label htmlFor="pswIn">Password</Label>
+                                <Input type="text" name="pswIn" id="pswIn" placeholder="at least 5 caracters" 
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
+                            </FormGroup>
+                        </Col>
+                    </Row>
+                        <FormGroup style={{display: displayForm === 'part1' ? "block" : "none"}}>
+                            <Label htmlFor="nameIn">Name</Label>
+                            <Input type="text" name="name" id="nameIn" placeholder="at least 5 caracters" 
+                                onChange={(e) => setName(e.target.value)}
+                            />
+                        </FormGroup>
+                        <FormGroup style={{display: displayForm === 'part1' ? "block" : "none"}}>
+                                <Label htmlFor="eventRecruiterIn">Type of music</Label>
+                                <Input type="select" name="event" id="eventRecruiterIn" 
+                                    onChange={(e) => setStyle(e.target.value)}
+                                >
+                                <option value="Rock">Rock</option>
+                                <option value="Blues">Blues</option>
+                                <option value="Latino music">Latino music</option>
+                                <option value="Country">Country</option>
+                                <option value="Rap">Rap</option>
+                                <option value="Reggae">Reggae</option>
+                                <option value="jazz">Jazz</option>
+                                </Input>
+                            </FormGroup>
                             <FormGroup style={{display: displayForm === 'part1' ? "block" : "none"}}>
-                                <Label htmlFor="nameIn">Name</Label>
-                                <Input type="text" name="name" id="nameIn" placeholder="at least 5 caracters" 
-                                    onChange={(e) => setName(e.target.value)}
+                                <Label htmlFor="eventIn">Event type</Label>
+                                <Input type="text" name="event" id="eventIn" placeholder="Lounges, birthdays..." 
+                                    onChange={(e) => setEventype(e.target.value)}
                                 />
                             </FormGroup>
                             <FormGroup style={{display: displayForm === 'part1' ? "block" : "none"}}>
-                                    <Label htmlFor="eventRecruiterIn">Type of music</Label>
-                                    <Input type="select" name="event" id="eventRecruiterIn" 
-                                        onChange={(e) => setStyle(e.target.value)}
-                                    >
-                                    <option value="Rock">Rock</option>
-                                    <option value="Blues">Blues</option>
-                                    <option value="Latino music">Latino music</option>
-                                    <option value="Country">Country</option>
-                                    <option value="Rap">Rap</option>
-                                    <option value="Reggae">Reggae</option>
-                                    <option value="jazz">Jazz</option>
-                                    </Input>
-                                </FormGroup>
+                                <Label htmlFor="costIn">Cost</Label>
+                                <Input type="number" name="cost" id="costIn" placeholder="$" 
+                                    onChange={(e) => setCost(e.target.value)}
+                                />
+                            </FormGroup>
                             <FormGroup style={{display: displayForm === 'part1' ? "block" : "none"}}>
                                 <Label htmlFor="descIn" >Description</Label>
                                 <Input type="textarea" name="style" id="descIn" placeholder="An introduction to your band" 
                                     onChange={(e) => setDescription(e.target.value)}
                                 />
                             </FormGroup>
-                            <Row>
-                                <button 
-                                     className="btn btn-info offset-10"
-                                     style={{display: displayForm === 'part1' ? "block" : "none"}}
-                                     onClick={() => setFormDisplay('part2')}  
-                                >
-                                    Next
-                                </button>
-                            </Row>
+                        <Row>
+                            <button 
+                                type="button"
+                                 className="btn btn-info offset-10"
+                                 style={{display: displayForm === 'part1' ? "block" : "none"}}
+                                 onClick={() => setFormDisplay('part2')}  
+                            >
+                                Next
+                            </button>
+                        </Row>
 
-                            <Row style={{display: displayForm === "part2" ? "block" : "none"}}>
-                                <Col md={6}>
-                                    <FormGroup>
-                                        <Label htmlFor="lineupIn">Line-up</Label>
-                                        <Input type="number" name="lineUp" id="lineupIn" placeholder="how many band memebers" 
-                                            onChange={(e) =>{ props.setLineup(e.target.value); setBandMembers(addMember(e.target.value)); console.log(addMember(e.target.value))  }}
-                                        />
-                                    </FormGroup>             
-                                </Col>
-                                <Col md={6}>
-                                    <FormGroup style={{marginLeft: 20}}> 
-                                        <Label></Label>
-                                            <Input type="checkbox" name="sound" checked={sound}
-                                                onChange={(e) => props.setSound(e.target.checked)}
-                                            />          
-                                    </FormGroup>             
-                                </Col>
-                                <Col>
-                                    {bandMembers.map(b => {
-                                    return (
-                                            <Row form>
-                                                <Col md={6} key={b}>
-                                                    <FormGroup>
-                                                        <Input type="text" name="city" id="exampleCity" placeholder="Name"/>
-                                                    </FormGroup>
-                                                </Col>
-                                                    <Col md={4}>
-                                                    <FormGroup>
-                                                        <Input type="text" name="state" id="exampleState" placeholder="Instrument"/>
-                                                    </FormGroup>
-                                                </Col>
-                                            </Row>
-                                        )
-                                    })}
-                                </Col>
-                            </Row>
-                            <Row>
-                                <ArrowBackIosIcon 
-                                    className="col-1 offset-8 btn-form-navigation"
-                                    style={{display: displayForm === 'part2' ? "block" : "none"}}
-                                    onClick={() => setFormDisplay('part1')} 
+                        <Row style={{display: displayForm === "part2" ? "flex" : "none"}}>
+                        <Col md={4}>
+                            <FormGroup>
+                                <Label htmlFor="countryIn" >Country</Label>
+                                <Input type="text" name="style" id="countryIn" placeholder="USA" 
+                                    onChange={(e) => setCountry(e.target.value)}
                                 />
-                                <ArrowForwardIosIcon 
-                                    className="col-1 btn-form-navigation"
-                                    style={{display: displayForm === 'part2' ? "block" : "none"}}
-                                    onClick={() => setFormDisplay('part3')}  
+                            </FormGroup>
+                        </Col>
+                        <Col md={4}>
+                            <FormGroup>
+                                <Label htmlFor="cityIn" >City</Label>
+                                <Input type="text" name="style" id="cityIn" placeholder="San Fransisco" 
+                                    onChange={(e) => setCity(e.target.value)}
                                 />
-                            </Row>
-
-                        <Row style={{display: displayForm === "part3" ? "flex" : "none"}}>
-                            <Col md={4}>
-                                <FormGroup>
-                                    <Label htmlFor="countryIn" >Country</Label>
-                                    <Input type="text" name="style" id="countryIn" placeholder="USA" 
-                                        onChange={(e) => setCountry(e.target.value)}
-                                    />
-                                </FormGroup>
-                            </Col>
-                            <Col md={4}>
-                                <FormGroup>
-                                    <Label htmlFor="cityIn" >City</Label>
-                                    <Input type="text" name="style" id="cityIn" placeholder="San Fransisco" 
-                                        onChange={(e) => setCity(e.target.value)}
-                                    />
-                                </FormGroup>
-                            </Col>
-                            <Col md={2}>
-                                <FormGroup>
-                                    <Label htmlFor="zipcodeIn">Zip-code</Label>
-                                    <Input type="number" name="zipCode" id="zipcodeIn" placeholder="95376.." 
-                                        onChange={(e) => setZipcode(e.target.value)}
-                                    />
-                                </FormGroup>
-                            </Col>
+                            </FormGroup>
+                        </Col>
+                        <Col md={2}>
+                            <FormGroup>
+                                <Label htmlFor="zipcodeIn">Zip-code</Label>
+                                <Input type="number" name="zipCode" id="zipcodeIn" placeholder="95376.." 
+                                    onChange={(e) => setZipcode(e.target.value)}
+                                />
+                            </FormGroup>
+                        </Col>
                         </Row>
                         <Row>
+                            
                             <ArrowBackIosIcon 
-                                    className="col-1 offset-8 btn-form-navigation"
-                                    style={{display: displayForm === 'part3' ? "block" : "none"}}
-                                    onClick={() => setFormDisplay('part2')} 
-                                />
+                                className="col-1 offset-8 btn-form-navigation"
+                                style={{display: displayForm === 'part2' ? "block" : "none"}}
+                                onClick={() => setFormDisplay('part1')} 
+                            />
                             <ArrowForwardIosIcon 
-                                    className="col-1 btn-form-navigation"
-                                    style={{display: displayForm === 'part3' ? "block" : "none"}}
-                                    onClick={() => setFormDisplay('part4')}  
-                                />
+                                className="col-1 btn-form-navigation"
+                                style={{display: displayForm === 'part2' ? "block" : "none"}}
+                                onClick={() => { handleClickForm1(); setFormDisplay('part3') }}
+                            />
                         </Row>
 
-                        <div style={{display: displayForm === 'part4' ? "flex" : "none"}}>
-                            {/* <form enctype="multipart/form-data" action="http://192.168.1.82:3001/upload" method="post">
+                    <Row style={{display: displayForm === "part3" ? "flex" : "none"}}>
+                    <Col md={6}>
+                                <FormGroup>
+                                    <Label htmlFor="lineupIn">Line-up</Label>
+                                    <Input type="number" name="lineUp" id="lineupIn" placeholder="how many band memebers" 
+                                        onChange={(e) =>{ setLineup(e.target.value); setBandMembers(addMember(e.target.value)); console.log(addMember(e.target.value))  }}
+                                    />
+                                </FormGroup>             
+                            </Col>
+                            <Col md={6}>
+                                <FormGroup style={{marginLeft: 20}}> 
+                                    <Label></Label>
+                                        <Input type="checkbox" name="sound" checked={sound}
+                                            onChange={(e) => props.setSound(e.target.checked)}
+                                        />          
+                                </FormGroup>             
+                            </Col>
+                            <Col>
+                                {bandMembers.map(b => {
+                                return (
+                                        <Row form>
+                                            <Col md={6} key={b}>
+                                                <FormGroup>
+                                                    <input type="text" name="city" id="exampleCity" placeholder="Name"
+                                                        onBlur={(e) => setMembersName(prevState => [...membersName, e.target.value]) }
+                                                        
+                                                    />
+                                                </FormGroup>
+                                            </Col>
+                                                <Col md={4}>
+                                                <FormGroup>
+                                                    <input type="text" name="state" id="exampleState" placeholder="Instrument"
+                                                        onBlur={(e) => setMembersInstruments(prevState => [...membersInstrument, e.target.value])  }
+                                                    />
+                                                </FormGroup>
+                                            </Col>
+                                        </Row>
+                                    )
+                                })}
+                            </Col>
+                        
+                    </Row>
+                    <Row>
+                        <ArrowBackIosIcon 
+                                className="col-1 offset-8 btn-form-navigation"
+                                style={{display: displayForm === 'part3' ? "block" : "none"}}
+                                onClick={() => setFormDisplay('part2')} 
+                            />
+                        <ArrowForwardIosIcon 
+                                className="col-1 btn-form-navigation"
+                                style={{display: displayForm === 'part3' ? "block" : "none"}}
+                                onClick={() => {handleClickform2(); setFormDisplay('part4') }}  
+                            />
+                    </Row>
+
+                    <div style={{display: displayForm === 'part4' ? "flex" : "none"}}>
+                        {/* <form enctype="multipart/form-data" action="http://192.168.1.82:3001/upload" method="post">
+                            <div>
+                                <input type="file" name="image" 
+                                    onChange={(e) => uploadFile(e.target.files[0])}
+                                />
+                                <input value={1} type="hidden" name="inputId" readOnly/>
+                            </div>
+                        </form> */}
+                        <Input type="file" name="image" className="col-6"
+                            onChange={(e) => uploadFile(e.target.files[0])}
+                        >
+                                
+                        </Input>
+                        <form enctype="multipart/form-data" action="http://192.168.1.82:3001/upload" method="post">
                                 <div>
                                     <input type="file" name="image" 
-                                        onChange={(e) => uploadFile(e.target.files[0])}
+                                        // onChange={(e) => uploadFile(e.target.files[0])}
                                     />
-                                    <input value={1} type="hidden" name="inputId" readOnly/>
+                                    <input value={bandId} type="hidden" name="inputId" readOnly/>
                                 </div>
-                            </form> */}
-                            <Input type="file" name="image" className="col-6"
-                                onChange={(e) => uploadFile(e.target.files[0])}
-                            >
-                                    
-                            </Input>
-                            <ArrowBackIosIcon 
-                                    className="col-1  btn-form-navigation"
-                                    onClick={() => setFormDisplay('part3')} 
-                                />
-                            <Button 
-                                id="namdFormSubmit-btn"
-                                className="form-submit-btn"
-                                onClick={() => handleClick()}
-                                value="upload"
-                            >
-                                Submit
-                            </Button>    
-                        </div>
-                    </Form>
-                </div>
+                                    <button type="submit" 
+                                        // onClick={() => handleClick()}
+                                    >Submiddt</button>
+                        </form>
+                        <ArrowBackIosIcon 
+                                className="col-1  btn-form-navigation"
+                                onClick={() => setFormDisplay('part3')} 
+                            />
+                        <Button 
+                            id="namdFormSubmit-btn"
+                            className="form-submit-btn"
+                            onClick={() => handleClickform3()}
+                            value="upload"
+                        >
+                            Submit
+                        </Button>    
+                    </div>
+                </Form>
             </div>
-        </>
+        </div>
+    </>
     )
-}
 
+}
 export default connect(mapStateToProps, mapDispatchToProps)(ArtistForm);
 
         // {name, style, lineup, zipcode, sound}

@@ -42,12 +42,9 @@ const dataExample =[
 
 
 const Home = props => {
-    const [bandFormDisplay, setBandFormDisplay] = useState('none');
-    const [recruiterFromDisplay, setRecFormDisplay] = useState('none');
 
     useEffect(() => {
         props.fetchBands();
-
     }, [])
 
     return (
@@ -57,11 +54,6 @@ const Home = props => {
                 <div className="row ">
                 </div>
             </div>
-         
-            {/* <div className="form-container">
-                <ArtistFrom displayBandForm={bandFormDisplay}/>
-                <RecruiterForm displayRecruiterForm={recruiterFromDisplay} />
-            </div> */}
             <div className="container-fluid p-0">
                     <div className="row justify-content-center my-5">
                         <Link className=" mx-5 link-form" to="/guests">
@@ -72,14 +64,14 @@ const Home = props => {
                             <PlayCircleFilledIcon className="icon-link" style={{color: "#023E7D"}}/>
                             <p>New Artist</p>
                         </Link>                 
-                        <Link className="mx-5 link-form">
+                        <a className="mx-5 link-form" href="https://www.linkedin.com/in/hamza-bouthour/" target="_blank">
                             <LinkedInIcon className="icon-link" style={{color: "#023E7D"}}/>
                             <p>LinkedIn</p>
-                        </Link>
-                        <Link className="mx-5 link-form">
+                        </a>
+                        <a className="mx-5 link-form" href="https://github.com/hamza-bouthour">
                             <GitHubIcon className="icon-link" style={{color: "#023E7D"}}/>
                             <p>Repository</p>
-                        </Link>
+                        </a>
                         
                     </div>
                    

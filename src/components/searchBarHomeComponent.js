@@ -39,7 +39,7 @@ const SearchBar = props => {
 
     return (
         <form className="row">
-            <input type="text" name="name" id="home-search-input" className="col-10 col-md-6 offset-md-3" placeholder="Rock, Birthday, Jazz band..."
+            <input type="text" name="name" id="home-search-input" className="col-6 offset-2" placeholder="Rock, Birthday, Jazz band..."
                 onChange={(e) => setQuery(e.target.value)}
             />
             <div className="col-2">

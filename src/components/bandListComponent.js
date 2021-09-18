@@ -62,10 +62,10 @@ function BandList(props) {
         }
         return ( 
             <div>
-                <img className="col-12 m-0 photo-header" src="https://i.postimg.cc/BQTqRVyK/music-hq-Cknyec2-Rnr-E-unsplash-1-1.jpg" />
+                <img className="col-12 m-0 photo-header" src="https://i.postimg.cc/026tQ8XS/bands-Component-Header.jpg" />
+                <div className="container">
                     <BandsNavigation />
                     <SearchBar />
-                <div className="container">
                     <div className="bands-container">
                         {bands.map((band, i) => {
                 

@@ -10,21 +10,21 @@ import SearchBar from './searchBarHomeComponent';
 
 const BandsNavigation = () => {
      return (
-         <div className="bands-nav-container">
+        
              <div className="container mb-5">
                 <div className="row pb-2" style={{borderBottom: "solid 1px #c5c5c5"}}>
-                    <Link className="col-1 bands-nav-link">
+                    <Link className="col-3 col-md-2 bands-nav-link" to="/home">
                         Home
                     </Link>  
-                    <Link className="col-1 bands-nav-link">
+                    <Link className="col-3 col-md-2 bands-nav-link" to="/profile">
                         Account
                     </Link>  
-                    <Link className="col-2 bands-nav-link">
+                    <Link className="col-6 bands-nav-link" to="/artists">
                         Create band
                     </Link> 
                 </div>
              </div>
-        </div>
+        
      )
 }
 

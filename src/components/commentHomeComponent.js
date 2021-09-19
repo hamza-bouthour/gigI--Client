@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const CommentHome = props => {
     const {userComment} = props
@@ -16,6 +16,5 @@ const CommentHome = props => {
 
     )
 }
-
 
 export default CommentHome;

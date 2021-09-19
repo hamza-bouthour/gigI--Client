@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchBands, deleteBand, fetchQueryBands } from '../redux/ActionCreators';
 
@@ -20,22 +19,19 @@ const SearchBar = props => {
     const history = useHistory();
     const [query, setQuery] = useState(null);
 
-
     const searchClick = async (e) => {
         e.preventDefault();
         const data = {
             query: query
         }
-       await props.fetchQueryBands(data)
+        await props.fetchQueryBands(data)
         if(props.bands.bands.searchBands.length > 0) {
             history.push('/bands')
         }
         else {
             alert('No bands found')
         }
-     
     }
-
 
     return (
         <form className="row">

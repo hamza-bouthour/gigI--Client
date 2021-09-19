@@ -1,8 +1,6 @@
 
 import * as ActionTypes from './ActionTypes';
 
-// band remover from local state
-
 
 export const bandReducer = (state = {band: '', members: []}, action) => {
     switch (action.type) {

@@ -4,16 +4,12 @@ import Home from './homeComponent';
 import BandList from './bandListComponent';
 import Login from './loginComponent';
 import Profile from './artistProfileComponent';
-import BandBox from './bandComponent';
 import { Switch, Route, Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';
 import ArtistForm from './artistFormComponent';
 import RecruiterForm from './guestFromComponent';
 import Test from './testComponent';
 
-// const mapDispatchToProps = {
-//     fetchBands
-// }
 const mapStateToProps = (bands, user) =>{
     return {
         bands,
@@ -24,18 +20,13 @@ const Main = (props) => {
     const BandInfo = ({match}) => {
         return (
             <div>
-                {/* <div className="row">
-                    <div className="col-12"> */}
-                        <Test band={props.bands.bands.bands.filter(band => band.bandId === +match.params.bandId)[0]}/>
-                    {/* </div>
-                </div> */}
+                <Test band={props.bands.bands.bands.filter(band => band.bandId === +match.params.bandId)[0]}/>
             </div>
         )
     }
      
     return (
-        <div>
-            
+        <div>   
            <Header />
            <Switch>
                 <Route exact path='/home' component={Home} />

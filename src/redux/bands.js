@@ -6,8 +6,7 @@ function removeBand(list, band) {
     
     const newList = list.filter(item => item.id !== band.id)
     return newList
- }
-
+}
 
 export const bands = (state = {isLoading: true, errMess: null, bands: [], searchBands: [], photos: ''}, action) => {
     switch (action.type) {

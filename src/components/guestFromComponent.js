@@ -13,6 +13,7 @@ const mapStateToProps = (bands) =>{
 }
 
 const RecruiterForm = props => {
+
     const [firstname, setFirstName] = useState('');
     const [lastname, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -21,17 +22,17 @@ const RecruiterForm = props => {
     const [event, setEvent] = useState('');
     
     function handleClick () {
-        const data = [
+        const data = {
             firstname,
             lastname,
             email,
             password,
             zipcode,
             event
-        ]
-        // console.log(data)
-        // props.addNewGuest(data);
+        }
+        return data;
     }
+
     return (
         <div style={{display: props.displayRecruiterForm}} className="recruiter-form">
             <Form>
@@ -96,16 +97,14 @@ const RecruiterForm = props => {
                     </Col>
                     
                     </Row>
-                
                 <Button 
-                        id="recFormSubmit-btn"
-                        onClick={() => handleClick()}
-                        className="form-submit-btn"
-                    >
-                        Submit
-                    </Button>
+                    id="recFormSubmit-btn"
+                    onClick={() => handleClick()}
+                    className="form-submit-btn"
+                >
+                    Submit
+                </Button>
             </Form>
-
         </div>
     )
 }

@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { Button, Form, FormGroup, Label, Input, Col, Row } from 'reactstrap';
+import { Form, FormGroup, Label, Input, Col, Row } from 'reactstrap';
 import urls from '../config';
 import { connect } from 'react-redux';
 import { addNewBand, addNewUser } from '../redux/ActionCreators';
-import Loading from './LoadingComponent';
 import { Link } from 'react-router-dom';
-import Header from './headerComponent';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
@@ -19,13 +17,6 @@ const mapStateToProps = (bands) =>{
     }
 }
 
-const FormRedirection = props => {
-    return (
-        <div>
-            <h3>Account successfully created!</h3>
-        </div>
-    )
-}
 
 const ArtistForm = props => {
     const [email, setEmail] = useState('');
@@ -38,22 +29,14 @@ const ArtistForm = props => {
     const [city, setCity] = useState('');
     const [zipcode, setZipcode] = useState(0);
     const [sound, setSound] = useState(true);
-    const [loading, enableLoading] = useState(false);
-    const [subscribed, enableSubscribe] = useState(false);
-    const [image, setImage] = useState(null);
     const [bandMembers, setBandMembers] = useState([0]);
     const [displayForm, setFormDisplay] = useState('part1');
-    const [file, uploadFile] = useState(null);
     const [cost, setCost] = useState(0);
     const [eventype, setEventype] = useState('');
     const [membersInstrument, setMembersInstruments] = useState([]);
     const [membersName, setMembersName] = useState([]);
     const [bandId, setBandId] = useState('');
     
-
-
-
-
 
     const addMember = (number) => {
         let i = 0;
@@ -141,11 +124,6 @@ async function handleClickform2() {
 }
 
 function handleClickform3() {
-    const data ={
-        file: JSON.stringify(file),
-        bandId
-        
-     }
     fetch('http://192.168.1.82:3001/upload', {
         method: 'POST', 
         body: JSON.stringify({id: bandId}),
@@ -159,32 +137,9 @@ function handleClickform3() {
     });
 }
 
-
-    // if (loading) {
-    //     return (
-    //         <Loading />
-    //     )
-    // }
-    // if (subscribed) {
-    //     return (
-    //         <div className="container my-5"> 
-    //             <div className="row">
-    //                 <h3 className="mx-auto">Account successfully Created!</h3>
-    //             </div>
-    //             <div className="row my-3">
-    //                 <div className="mx-auto">
-    //                     <Link to="/bands" className="button-form-center">Bands</Link>
-    //                     <Link to="/profile" className="button-form-center">Profile</Link> 
-    //                 </div>
-    //             </div>
-    //         </div>
-    //     )
-    // }
-
     return (
         <>
-        {/* <Header /> */}
-        <img className="col-12 m-0 photo-header" src="https://i.postimg.cc/026tQ8XS/bands-Component-Header.jpg" />
+        <img className="col-12 m-0 photo-header" src="https://i.postimg.cc/026tQ8XS/bands-Component-Header.jpg" alt="cover-header"/>
         <div className="container my-5 artist-form-container">
             <div style={{display: props.displayBandForm}} className="band-form">
                 <Form>
@@ -255,7 +210,6 @@ function handleClickform3() {
                                 Next
                             </button>
                         </Row>
-
                         <Row style={{display: displayForm === "part2" ? "flex" : "none"}}>
                         <Col md={4}>
                             <FormGroup>
@@ -282,8 +236,7 @@ function handleClickform3() {
                             </FormGroup>
                         </Col>
                         </Row>
-                        <Row>
-                            
+                        <Row>     
                             <ArrowBackIosIcon 
                                 className="col-1 offset-8 btn-form-navigation"
                                 style={{display: displayForm === 'part2' ? "block" : "none"}}
@@ -295,48 +248,45 @@ function handleClickform3() {
                                 onClick={() => { handleClickForm1(); setFormDisplay('part3') }}
                             />
                         </Row>
-
                     <Row style={{display: displayForm === "part3" ? "flex" : "none"}}>
-                    <Col md={6}>
-                                <FormGroup>
-                                    <Label htmlFor="lineupIn">Line-up</Label>
-                                    <Input type="number" name="lineUp" id="lineupIn" placeholder="how many band memebers" 
-                                        onChange={(e) =>{ setLineup(e.target.value); setBandMembers(addMember(e.target.value)); console.log(addMember(e.target.value))  }}
-                                    />
-                                </FormGroup>             
-                            </Col>
-                            <Col md={6}>
-                                <FormGroup style={{marginLeft: 20}}> 
-                                    <Label></Label>
-                                        <Input type="checkbox" name="sound" checked={sound}
-                                            onChange={(e) => props.setSound(e.target.checked)}
-                                        />          
-                                </FormGroup>             
-                            </Col>
-                            <Col>
-                                {bandMembers.map(b => {
-                                return (
-                                        <Row form>
-                                            <Col md={6} key={b}>
-                                                <FormGroup>
-                                                    <input type="text" name="city" id="exampleCity" placeholder="Name"
-                                                        onBlur={(e) => setMembersName(prevState => [...membersName, e.target.value]) }
-                                                        
-                                                    />
-                                                </FormGroup>
-                                            </Col>
-                                                <Col md={4}>
-                                                <FormGroup>
-                                                    <input type="text" name="state" id="exampleState" placeholder="Instrument"
-                                                        onBlur={(e) => setMembersInstruments(prevState => [...membersInstrument, e.target.value])  }
-                                                    />
-                                                </FormGroup>
-                                            </Col>
-                                        </Row>
-                                    )
-                                })}
-                            </Col>
-                        
+                        <Col md={6}>
+                            <FormGroup>
+                                <Label htmlFor="lineupIn">Line-up</Label>
+                                <Input type="number" name="lineUp" id="lineupIn" placeholder="how many band memebers" 
+                                    onChange={(e) =>{ setLineup(e.target.value); setBandMembers(addMember(e.target.value)); console.log(addMember(e.target.value))  }}
+                                />
+                            </FormGroup>             
+                        </Col>
+                        <Col md={6}>
+                            <FormGroup style={{marginLeft: 20}}> 
+                                <Label></Label>
+                                    <Input type="checkbox" name="sound" checked={sound}
+                                        onChange={(e) => props.setSound(e.target.checked)}
+                                    />          
+                            </FormGroup>             
+                        </Col>
+                        <Col>
+                            {bandMembers.map(b => {
+                            return (
+                                    <Row form>
+                                        <Col md={6} key={b}>
+                                            <FormGroup>
+                                                <input type="text" name="city" id="exampleCity" placeholder="Name"
+                                                    onBlur={(e) => setMembersName(prevState => [...membersName, e.target.value]) }    
+                                                />
+                                            </FormGroup>
+                                        </Col>
+                                            <Col md={4}>
+                                            <FormGroup>
+                                                <input type="text" name="state" id="exampleState" placeholder="Instrument"
+                                                    onBlur={(e) => setMembersInstruments(prevState => [...membersInstrument, e.target.value])  }
+                                                />
+                                            </FormGroup>
+                                        </Col>
+                                    </Row>
+                                )
+                            })}
+                        </Col>
                     </Row>
                     <Row>
                         <ArrowBackIosIcon 
@@ -350,21 +300,7 @@ function handleClickform3() {
                                 onClick={() => {handleClickform2(); setFormDisplay('part4') }}  
                             />
                     </Row>
-
                     <div style={{display: displayForm === 'part4' ? "flex" : "none", justifyContent: 'center'}}>
-                        {/* <form enctype="multipart/form-data" action="http://192.168.1.82:3001/upload" method="post">
-                            <div>
-                                <input type="file" name="image" 
-                                    onChange={(e) => uploadFile(e.target.files[0])}
-                                />
-                                <input value={1} type="hidden" name="inputId" readOnly/>
-                            </div>
-                        </form> */}
-                        {/* <Input type="file" name="image" className="col-6"
-                            onChange={(e) => uploadFile(e.target.files[0])}
-                        >
-                                
-                        </Input> */}
                         <form enctype="multipart/form-data"action="http://192.168.1.82:3001/upload" method="post">
                                 <div  className="form-group">
                                     <input type="file" name="image" 
@@ -378,18 +314,6 @@ function handleClickform3() {
                                     </Link>
                                 </div>
                         </form>
-                        {/* <ArrowBackIosIcon 
-                                className="col-1  btn-form-navigation"
-                                onClick={() => setFormDisplay('part3')} 
-                            />
-                        <Button 
-                            id="namdFormSubmit-btn"
-                            className="form-submit-btn"
-                            onClick={() => handleClickform3()}
-                            value="upload"
-                        >
-                            Submit
-                        </Button>     */}
                     </div>
                 </Form>
             </div>

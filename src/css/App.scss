@@ -177,6 +177,9 @@ background: linear-gradient(143deg, rgba(3,159,182,1) 0%, rgba(238,84,7,1) 77%);
 }
 .form-submit-btn {
   background-color: $primary-color !important;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
 }
 .instruments-container {
   @include flexHorizentalStart();
@@ -231,6 +234,9 @@ background: linear-gradient(143deg, rgba(3,159,182,1) 0%, rgba(238,84,7,1) 77%);
     color: darkslateblue;
     /* font-size: 9px; */
     border: none;
+  }
+  .form-upload {
+    display: flex;
   }
 }
 .recruiter-form {
@@ -452,4 +458,13 @@ background: linear-gradient(143deg, rgba(3,159,182,1) 0%, rgba(238,84,7,1) 77%);
     padding: 27px;
 
   }
+// }	connection.query('SELECT * FROM accounts WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
+//   if (results.length > 0) {
+//     request.session.loggedin = true;
+//     request.session.username = username;
+//     response.redirect('/home');
+//   } else {
+//     response.send('Incorrect Username and/or Password!');
+//   }			
+//   response.end();
 }

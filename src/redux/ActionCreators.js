@@ -31,6 +31,7 @@ export const addBand = (data) => ({
 //     photos: photos
 // })
 export const fetchBands = () => dispatch => {
+    console.log(urls.bandsUrl)
     dispatch(bandsLoading())
    return fetch(urls.bandsUrl, {
         method: 'GET', 
@@ -135,8 +136,8 @@ export const deleteBand = band => ({
     payload: band
 })
 export const loginUser = data  => dispatch => {
-    console.log(data)
-    fetch(`${urls.usersUrl}/`, {
+    // console.log(data)
+    fetch(urls.usersUrl, {
         method: 'POST', 
         body: JSON.stringify(data),
         headers: {
@@ -144,7 +145,15 @@ export const loginUser = data  => dispatch => {
         }
     })
     .then(response => response.json())
-    .then(response => dispatch(subscribeUser(response.data[0])))
+    // .then(response => console.log(response.data[0]))
+    .then(response => {
+        if (response.data[0]) {
+            dispatch(subscribeUser(response.data[0]))
+        }
+        else {
+            dispatch(subscribeUser('no data'))
+        }
+    })
     .catch((error) => {
     console.error('Error:', error);
 });

@@ -121,8 +121,7 @@ async function handleClickform2() {
         obj['instrument'] = membersInstrument[i];
         membersList.push(obj)
     }
-    // return membersList;
-    // console.log(membersList)
+
     let data = {
         list: membersList,
         id: bandId
@@ -352,7 +351,7 @@ function handleClickform3() {
                             />
                     </Row>
 
-                    <div style={{display: displayForm === 'part4' ? "flex" : "none"}}>
+                    <div style={{display: displayForm === 'part4' ? "flex" : "none", justifyContent: 'center'}}>
                         {/* <form enctype="multipart/form-data" action="http://192.168.1.82:3001/upload" method="post">
                             <div>
                                 <input type="file" name="image" 
@@ -361,23 +360,25 @@ function handleClickform3() {
                                 <input value={1} type="hidden" name="inputId" readOnly/>
                             </div>
                         </form> */}
-                        <Input type="file" name="image" className="col-6"
+                        {/* <Input type="file" name="image" className="col-6"
                             onChange={(e) => uploadFile(e.target.files[0])}
                         >
                                 
-                        </Input>
-                        <form enctype="multipart/form-data" action="http://192.168.1.82:3001/upload" method="post">
-                                <div>
+                        </Input> */}
+                        <form enctype="multipart/form-data"action="http://192.168.1.82:3001/upload" method="post">
+                                <div  className="form-group">
                                     <input type="file" name="image" 
-                                        // onChange={(e) => uploadFile(e.target.files[0])}
                                     />
                                     <input value={bandId} type="hidden" name="inputId" readOnly/>
+                                    <Link to='/home'>
+                                        <input type="submit" className="form-submit-btn px-3 py-1"
+                                            // onClick={() => handleClick()}
+                                        />
+                                
+                                    </Link>
                                 </div>
-                                    <button type="submit" 
-                                        // onClick={() => handleClick()}
-                                    >Submiddt</button>
                         </form>
-                        <ArrowBackIosIcon 
+                        {/* <ArrowBackIosIcon 
                                 className="col-1  btn-form-navigation"
                                 onClick={() => setFormDisplay('part3')} 
                             />
@@ -388,7 +389,7 @@ function handleClickform3() {
                             value="upload"
                         >
                             Submit
-                        </Button>    
+                        </Button>     */}
                     </div>
                 </Form>
             </div>

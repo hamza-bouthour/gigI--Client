@@ -45,7 +45,7 @@ const Main = (props) => {
                 <Route exact path="/artists" component={ArtistForm} />
                 <Route exact path="/guests" component={RecruiterForm} />
                 <Route exact path="/login">
-                    {props.bands.user.loggedIn ? <Redirect to="/profile" /> : <Login />}
+                    {props.bands.user.loggedIn ? <Redirect to="/home" /> : <Login />}
                 </Route>
                 <Redirect to='/home'/> 
            </Switch>

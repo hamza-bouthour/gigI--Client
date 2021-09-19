@@ -1,12 +1,12 @@
-// const bandsUrl = 'http://192.168.1.82:3001/bands';
-// const usersUrl = 'http://192.168.1.82:3001/bands';
+
+const url = "http://192.168.1.82:3001"
 const urls = {
-    bandsUrl: 'http://192.168.1.82:3001/bands',
-    bandMemberUrl: 'http://192.168.1.82:3001/bands/band/members',
-    usersUrl: 'http://192.168.1.82:3001/users',
-    uploadUrl: 'http://192.168.1.82:3001/upload',
-    searchUrl: 'http://192.168.1.82:3001/search',
-    membersUrl: 'http://192.168.1.82:3001/members'
+    bandsUrl: `${url}/bands`,
+    bandMemberUrl: `${url}/bands/band/members`,
+    usersUrl: `${url}/users`,
+    uploadUrl: `${url}/upload`,
+    searchUrl: `${url}/search`,
+    membersUrl: `${url}/members`
 }
 
 export default urls;

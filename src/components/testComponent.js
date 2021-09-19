@@ -53,10 +53,11 @@ const Test = props => {
                 <div className="container">
                     <div className="row members-list-container">
                         {bandMembers.data.map(member => {
+                            
                             console.log(member)
                             return (
                                 <div className="card col-6 member-box" style={{width: "18rem;"}}>
-                                    <img className="card-img-top" src={member.image.length > 20 ? `https://gigitv2.herokuapp.com/${member.image}` : 'https://i.postimg.cc/DfJNKW5s/download.jpg'} alt="Card image cap" />
+                                    <img className="card-img-top" src={member.image.length > 2 ? `http://192.168.1.82:3001/${member.image}` : 'https://i.postimg.cc/DfJNKW5s/download.jpg'} alt="Card image cap" />
                                     <div className="card-body p-2">
                                         <h5 className="member-name">{member.artistname} <span >{member.instrument}</span></h5>
                 

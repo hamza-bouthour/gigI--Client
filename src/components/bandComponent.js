@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchBands } from '../redux/ActionCreators';
 import { Col, Row } from 'reactstrap';
+import urls from '../config';
 
 const mapDispatchToProps = {
     fetchBands, 
@@ -29,7 +30,7 @@ const BandBox = props => {
         <Row className="my-5 p-2">
             <Col md={8}  className="band-box">
                 <h3 className="mb-1 band-box-name">{capitalize(band.name)}</h3>
-                <img  className="band-box-photo" style={{borderRadius: "5px", marginBottom: "5px"}} src={`http://192.168.1.82:3001/${band.image}`} alt="cover-header"/>
+                <img  className="band-box-photo" style={{borderRadius: "5px", marginBottom: "5px"}} src={`${urls.url}/${band.image}`} alt="cover-header"/>
                 <div className="band-box-bottom">
                     <div className="band-box-buttons">
                         <Link to={`bands/${band.bandId}`}>

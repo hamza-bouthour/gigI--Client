@@ -7,7 +7,8 @@ const urls = {
     usersUrl: `${url}/users`,
     uploadUrl: `${url}/upload`,
     searchUrl: `${url}/search`,
-    membersUrl: `${url}/members`
+    membersUrl: `${url}/members`,
+    url
 }
 
 export default urls;

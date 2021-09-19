@@ -30,7 +30,7 @@ const Test = props => {
           setbandMembers(members)
         }
         fetchBandMembers(band.bandId);
-    }, [bandMembers])
+    }, [bandMembers, band.bandId])
 
     if(bandMembers.data) {
         return (

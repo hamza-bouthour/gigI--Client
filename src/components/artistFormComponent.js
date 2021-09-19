@@ -62,21 +62,7 @@ const ArtistForm = props => {
             console.error('Error:', error);
         });
     }
-    const addMembersToBand = (member, bandId) => {
 
-        fetch(urls.bandsUrl, {
-            method: 'POST', 
-            body: JSON.stringify(member),
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            }
-            })
-            .then(response => response.json())
-            .then(response => setBandId(response.data[0].bandId))
-            .catch((error) => {
-            console.error('Error:', error);
-        });
-    }
    function handleClickForm1() {
         const data = {
             email,
@@ -93,7 +79,6 @@ const ArtistForm = props => {
             cost,
             eventype
         }
-        console.log(data)
         fetchNewBand(data)  
 }
 async function handleClickform2() {
@@ -122,21 +107,6 @@ async function handleClickform2() {
         console.error('Error:', error);
     });
 }
-
-function handleClickform3() {
-    fetch('http://192.168.1.82:3001/upload', {
-        method: 'POST', 
-        body: JSON.stringify({id: bandId}),
-        headers: {
-            "Content-type": "multipart/form-data; boundary=<calculated when request is sent>",       
-        }
-    })
-        .then(response => response.json())
-        .catch((error) => {
-        console.error('Error:', error);
-    });
-}
-
     return (
         <>
         <img className="col-12 m-0 photo-header" src="https://i.postimg.cc/026tQ8XS/bands-Component-Header.jpg" alt="cover-header"/>
@@ -261,7 +231,7 @@ function handleClickform3() {
                             <FormGroup style={{marginLeft: 20}}> 
                                 <Label></Label>
                                     <Input type="checkbox" name="sound" checked={sound}
-                                        onChange={(e) => props.setSound(e.target.checked)}
+                                        onChange={(e) => setSound(e.target.checked)}
                                     />          
                             </FormGroup>             
                         </Col>

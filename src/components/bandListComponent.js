@@ -27,7 +27,7 @@ function BandList(props) {
          else {
              getData(props.bands.bands.searchBands)
             }  
-    },[bands])
+    },[props, bands])
 
     if (props.bands.bands.isLoading) {
         return (

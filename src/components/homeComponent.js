@@ -38,7 +38,7 @@ const Home = props => {
 
     useEffect(() => {
         props.fetchBands();
-    }, [])
+    }, [props])
     if(props.bands.user.loggedIn) {
         return (
             <div>
@@ -57,7 +57,7 @@ const Home = props => {
                             <PlayCircleFilledIcon className="icon-link" style={{color: "#023E7D"}}/>
                             <p>New Artist</p>
                         </Link>                 
-                        <a className="mx-5 link-form" href="https://www.linkedin.com/in/hamza-bouthour/" target="_blank">
+                        <a className="mx-5 link-form" href="https://www.linkedin.com/in/hamza-bouthour/" target="_blank" rel="noreferrer">
                             <LinkedInIcon className="icon-link" style={{color: "#023E7D"}}/>
                             <p>LinkedIn</p>
                         </a>

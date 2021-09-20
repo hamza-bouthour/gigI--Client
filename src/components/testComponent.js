@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import BandBox from './bandComponent';
+import urls from '../config';
 
 
 const mapStateToProps = (bands, user) =>{
@@ -16,8 +17,10 @@ const Test = props => {
     const {band} = props;
   
     useEffect(() => {
+
         const fetchBandMembers = async (id) => {
-            const members = await fetch(`http://192.168.1.82:3001/bands/${id}`, {
+            console.log(`${urls.url}/${id}`)
+            const members = await fetch(`${urls.bandsUrl}/${id}`, {
                 method: 'GET', 
                 headers: {
                     "Content-type": "application/json; charset=UTF-8"
@@ -30,7 +33,8 @@ const Test = props => {
           setbandMembers(members)
         }
         fetchBandMembers(band.bandId);
-    }, [bandMembers, band.bandId])
+        console.log(bandMembers)
+    }, [])
 
     if(bandMembers.data) {
         return (
@@ -42,9 +46,10 @@ const Test = props => {
                 <div className="container">
                     <div className="row members-list-container">
                         {bandMembers.data.map(member => {
+                            console.log(member.image)
                             return (
                                 <div className="card col-6 member-box" style={{width: "18rem;"}}>
-                                    <img className="card-img-top" src={member.image.length > 2 ? `http://192.168.1.82:3001/${member.image}` : 'https://i.postimg.cc/DfJNKW5s/download.jpg'} alt="cover-header" />
+                                    <img className="card-img-top" src={member.image.length > 2 ? `${urls.url}/${member.image}` : 'https://i.postimg.cc/DfJNKW5s/download.jpg'} alt="cover-header" />
                                     <div className="card-body p-2">
                                         <h5 className="member-name">{member.artistname} <span >{member.instrument}</span></h5>
                                     </div>

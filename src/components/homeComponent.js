@@ -38,7 +38,7 @@ const Home = props => {
 
     useEffect(() => {
         props.fetchBands();
-    }, [props])
+    }, [])
     if(props.bands.user.loggedIn) {
         return (
             <div>

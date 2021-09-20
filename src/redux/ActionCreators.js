@@ -129,6 +129,11 @@ export const loginUser = data  => dispatch => {
     .then(response => {
         if (response.data[0]) {
             dispatch(subscribeUser(response.data[0]))
+            let email = response.data[0].email;
+            let password = response.data[0].password;
+            localStorage.setItem('email', email);
+            localStorage.setItem('password', password);
+            // window.location.reload();
         }
         else {
             dispatch(subscribeUser('no data'))

@@ -230,9 +230,9 @@ async function handleClickform2() {
                         <Col md={6}>
                             <FormGroup style={{marginLeft: 20}}> 
                                 <Label></Label>
-                                    <Input type="checkbox" name="sound" checked={sound}
+                                    {/* <Input type="checkbox" name="sound" checked={sound}
                                         onChange={(e) => setSound(e.target.checked)}
-                                    />          
+                                    />           */}
                             </FormGroup>             
                         </Col>
                         <Col>

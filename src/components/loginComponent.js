@@ -22,15 +22,25 @@ const Login = props => {
     const [saveCre, setCred] = useState(false);
    
     useEffect(() => {
-        console.log(props.bands.user.loggedIn, 'LOOOOOK EGERE')
-    })
+        if (localStorage.getItem('email')) {
+
+            let localEmail = localStorage.getItem('email');
+            let localPassword = localStorage.getItem('password');
+            const data = {
+                type: 'local',
+                email: localEmail,
+                password: localPassword
+            }
+            props.loginUser(data)
+        }
+    }, [])
 
     async  function handleClick(e) {
       e.preventDefault();
         const data ={
-           email,
-           password
-           
+            type: 'typed',
+            email,
+            password   
         }
         props.loginUser(data)
     }

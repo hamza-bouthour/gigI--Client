@@ -34,7 +34,7 @@ const Test = props => {
         }
         fetchBandMembers(band.bandId);
         console.log(bandMembers)
-    }, [])
+    }, [setbandMembers])
 
     if(bandMembers.data) {
         return (

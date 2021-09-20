@@ -25,25 +25,25 @@ const SearchBar = props => {
             query: query
         }
         await props.fetchQueryBands(data)
-        if(props.bands.bands.searchBands.length > 0) {
-            history.push('/bands')
-        }
-        else {
-            alert('No bands found')
-        }
+        // if(props.bands.bands.searchBands.length > 0) {
+        //     console.log(props.bands.bands.searchBands)
+        //     history.push('/bands')
+        // }
     }
 
     return (
-        <form className="row">
-            <input type="text" name="name" id="home-search-input" className="col-6 offset-2" placeholder="Rock, Birthday, Jazz band..."
-                onChange={(e) => setQuery(e.target.value)}
-            />
-            <div className="col-2">
-                <input type="submit"  id="home-search-btn" 
-                    onClick={(e) => searchClick(e)}
+        <div>
+            <form className="row">
+                <input type="text" name="name" id="home-search-input" className="col-6 offset-2" placeholder="Rock, Birthday, Jazz band..."
+                    onChange={(e) => setQuery(e.target.value)}
                 />
-            </div>
-    </form>
+                <div className="col-2">
+                    <input type="submit"  id="home-search-btn" 
+                        onClick={(e) => searchClick(e)}
+                    />
+                </div>
+            </form>
+        </div>
     )
 }
 

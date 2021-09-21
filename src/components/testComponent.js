@@ -33,7 +33,7 @@ const Test = props => {
           setbandMembers(members)
         }
         fetchBandMembers(band.bandId);
-    }, [setbandMembers])
+    }, [band.bandId])
 
     if(bandMembers.data) {
         return (
@@ -44,10 +44,9 @@ const Test = props => {
                 </div>
                 <div className="container">
                     <div className="row members-list-container">
-                        {bandMembers.data.map(member => {
-                            console.log(member.image)
+                        {bandMembers.data.map((member, i) => {
                             return (
-                                <div className="card col-6 member-box" style={{width: "18rem;"}}>
+                                <div key={i} className="card col-6 member-box" style={{width: "18rem"}}>
                                     <img className="card-img-top" src={member.image.length > 2 ? `${urls.url}/${member.image}` : 'https://i.postimg.cc/DfJNKW5s/download.jpg'} alt="cover-header" />
                                     <div className="card-body p-2">
                                         <h5 className="member-name">{member.artistname} <span >{member.instrument}</span></h5>

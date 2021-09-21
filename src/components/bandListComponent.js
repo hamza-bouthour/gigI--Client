@@ -60,7 +60,7 @@ function BandList(props) {
          else {
              getData(props.bands.bands.searchBands)
             }  
-    }, [props, props.bands])
+    }, [])
 
 
     if (props.bands.bands.isLoading) {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { deleteBand, bandsLoading, addBands } from '../redux/ActionCreators';
 import Loading from './LoadingComponent';
@@ -37,13 +37,22 @@ function DisplayResultbox(props) {
     } else return(<div></div>)
     
 }
-function BandList(props) {
 
-    const [bands, getData] = useState([]);
-    
-    useEffect(() => {
-        if (!props.bands.bands.isSearching) {
-            props.bandsLoading()
+class BandList extends Component {
+    constructor(props) {
+        super();
+        this.state = {
+            bands: []
+          
+        }
+
+        
+    }
+
+    componentDidMount() {
+        console.log('sad')
+        if (!this.props.bands.bands.isSearching) {
+            this.props.bandsLoading()
                  fetch(urls.bandsUrl, {
                 method: 'GET', 
                 headers: {
@@ -51,46 +60,58 @@ function BandList(props) {
                 }
                 })
                 .then(response => response.json())
-                .then(response => {props.addBands(response.data); getData(response.data)})
+                .then(response => {this.props.addBands(response.data); this.setState({bands: response.data})})
                 .catch((error) => {
                     new Error(error.message)
             });
              
         }
          else {
-             getData(props.bands.bands.searchBands)
-            }  
-    }, [])
+             this.setState({bands: this.props.bands.bands.searchBands})
+            } 
 
+    }
 
-    if (props.bands.bands.isLoading) {
-        return (
-            <Loading />
-        )
-    }
-    if  (props.bands.bands.errMess) {
-        return (
-            <h3>{props.bands.bands.errMess}</h3>
-        )
-    }
-    return ( 
-        <div>
-            <img className="col-12 m-0 photo-header" src="https://i.postimg.cc/026tQ8XS/bands-Component-Header.jpg" alt="cover-header"/>
-            <div className="container">
-                <BandsNavigation />
-                <SearchBar />
-                <DisplayResultbox result={props.bands.bands.isSearching ? props.bands.bands.searchBands : ''} isSearching={props.bands.bands.isSearching}/>
-                    {bands.map((band, i) => {
-                        console.log(band)
-                        return (
-                            <BandBox key={i} band={band}/>
-                        )
-                    })}
+    render() {
+        if (this.props.bands.bands.isLoading) {
+            return (
+                <Loading />
+            )
+        }
+        if  (this.props.bands.bands.errMess) {
+            return (
+                <h3>{this.props.bands.bands.errMess}</h3>
+            )
+        }
+        return ( 
+            <div>
+                <img className="col-12 m-0 photo-header" src="https://i.postimg.cc/026tQ8XS/bands-Component-Header.jpg" alt="cover-header"/>
+                <div className="container">
+                    <BandsNavigation />
+                    <SearchBar />
+                    <DisplayResultbox result={this.props.bands.bands.isSearching ? this.props.bands.bands.searchBands : ''} isSearching={this.props.bands.bands.isSearching}/>
+                        {this.state.bands.map((band, i) => {
+                            return (
+                                <BandBox key={i} band={band}/>
+                            )
+                        })}
+                </div>
             </div>
-        </div>
-        
-    )
+            
+        )
+    }
 }
+// function BandList(props) {
+
+//     // const [bands, getData] = useState([]);
+    
+//     // useEffect(() => {
+     
+//     // }, [])
+
+
+ 
+// }
 export default connect(mapStateToProps, mapDispatchToProps)(BandList);
 
 

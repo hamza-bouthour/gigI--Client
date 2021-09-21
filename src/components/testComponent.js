@@ -17,23 +17,21 @@ const Test = props => {
     const {band} = props;
   
     useEffect(() => {
-
         const fetchBandMembers = async (id) => {
-            console.log(`${urls.url}/${id}`)
-            const members = await fetch(`${urls.bandsUrl}/${id}`, {
-                method: 'GET', 
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8"
-                }
-                })   
-                .then(response => response.json())
-                .catch((error) => {
-                    new Error(error.message)
-            });  
-          setbandMembers(members)
+        const members = await fetch(`${urls.bandsUrl}/${id}`, {
+                                method: 'GET', 
+                                headers: {
+                                    "Content-type": "application/json; charset=UTF-8"
+                                }
+                                })   
+                                .then(response => response.json())
+                                .catch((error) => {
+                                    new Error(error.message)
+                            });  
+        setbandMembers(members)
         }
         fetchBandMembers(band.bandId);
-    }, [band.bandId])
+    }, [band])
 
     if(bandMembers.data) {
         return (

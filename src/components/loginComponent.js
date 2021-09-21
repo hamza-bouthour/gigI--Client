@@ -33,7 +33,6 @@ class Login extends Component {
         if (localStorage.getItem('email')) {
             let localEmail = localStorage.getItem('email');
             let localPassword = localStorage.getItem('password');
-            console.log(localEmail, localPassword)
             const data = {
                 type: 'local',
                 email: localEmail,
@@ -67,7 +66,7 @@ class Login extends Component {
                                         />
                                     </FormGroup>
                                     <FormGroup className="">
-                                        <Input type="password" name="password" id="examplePassword" placeholder="password" 
+                                        <Input type="password" name="password" id="examplePassword" placeholder="password" autoComplete="on"
                                             onChange={(e) => this.setState({password: e.target.value})}
                                         />
                                     </FormGroup>

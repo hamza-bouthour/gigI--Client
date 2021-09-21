@@ -282,7 +282,7 @@ async function handleClickform2(e) {
                                         style={{display: displayForm === 'part4' ? "block" : "none"}}
                                         onClick={() => setFormDisplay('part3')} 
                                     >Back</button> 
-                                        <input type="submit" style={{background: "none", border: "none", color: "aliceblue"}}/>
+                                        <button type="button" style={{background: "none", border: "none", color: "aliceblue"}}><button type="submit" class="btn btn-primary">Submit</button></button>
                                 </div>
                             </form>
                         </Row>

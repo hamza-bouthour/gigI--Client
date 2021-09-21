@@ -217,6 +217,7 @@ background: linear-gradient(143deg, rgba(3,159,182,1) 0%, rgba(238,84,7,1) 77%);
 }
 .artist-form-container {
   // margin-top: 100px;
+  background-color: #002855;
   color: #000;
   border: solid 1px #c5c5c5;
   border-radius: 4px;
@@ -226,19 +227,26 @@ background: linear-gradient(143deg, rgba(3,159,182,1) 0%, rgba(238,84,7,1) 77%);
     padding: 25px; 
     border-radius: 10px;
     // background-color: rgb(12, 61, 61) !important;
+    .btn-form-navigation {
+      text-align: center;
+      border-radius: 4px;
+      padding: 3px;
+    }
+    .btn-back {
+      background: #47575f;
+      color: aliceblue;
+    }
+    .btn-next {
+      background: #1a7098;
+      color: aliceblue;
+    }
   }
-  .btn-form-navigation {
-    // background-color: red;
-    // display: block;
-    background: none;
-    color: darkslateblue;
-    /* font-size: 9px; */
-    border: none;
-  }
+ 
   .form-upload {
     display: flex;
   }
 }
+
 .recruiter-form {
 
   color: beige;

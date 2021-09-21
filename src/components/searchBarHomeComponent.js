@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useHistory } from "react-router-dom";
 import { connect } from 'react-redux';
 import { fetchBands, deleteBand, fetchQueryBands } from '../redux/ActionCreators';
 
@@ -16,7 +15,6 @@ const mapStateToProps = (bands, user) => {
 }
 
 const SearchBar = props => {
-    const history = useHistory();
     const [query, setQuery] = useState(null);
 
     const searchClick = async (e) => {
@@ -25,10 +23,6 @@ const SearchBar = props => {
             query: query
         }
         await props.fetchQueryBands(data)
-        // if(props.bands.bands.searchBands.length > 0) {
-        //     console.log(props.bands.bands.searchBands)
-        //     history.push('/bands')
-        // }
     }
 
     return (

@@ -37,7 +37,7 @@ const BandBox = props => {
                             <button className="btn-band-box"><i className="fa fa-1x fa-id-badge mr-1"></i>Profile</button>
                         </Link>
                         <Link to={`bands/${band.bandId}`}>
-                            <button className="btn-band-box"><i class="fa fa-1x fa-address-book mr-1"></i>Reserve</button>
+                            <button className="btn-band-box"><i className="fa fa-1x fa-address-book mr-1"></i>Reserve</button>
                         </Link>
                         <button className="btn-band-box"><i className="fa fa-1x fa-star mr-1"></i>Add to favorites</button>
                         <button className="btn-band-box"><i className="fa fa-1x fa-dollar-sign"></i></button>
@@ -57,9 +57,9 @@ const BandBox = props => {
                     <hr />
                     <li>{band.country}</li>
                     <li>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked={band.sound === 0 ? false : true} />
-                            <label class="form-check-label" for="flexSwitchCheckChecked">Sound system</label>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked={band.sound === 0 ? false : true} readOnly/>
+                            <label className="form-check-label" htmlFor="flexSwitchCheckChecked">Sound system</label>
                         </div>
                     </li>
                 </ul>

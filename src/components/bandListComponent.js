@@ -23,10 +23,6 @@ function DisplayResultbox(props) {
     const {result} = props;
     const {isSearching} = props;
     const length = result.length;
-    console.log(result, 'result')
-    console.log(length, 'length')
-    console.log(isSearching, 'isSearching')
-
     if (result && length > 0) {
         return (
             <div className="row">
@@ -85,6 +81,7 @@ function BandList(props) {
                 <SearchBar />
                 <DisplayResultbox result={props.bands.bands.isSearching ? props.bands.bands.searchBands : ''} isSearching={props.bands.bands.isSearching}/>
                     {bands.map((band, i) => {
+                        console.log(band)
                         return (
                             <BandBox key={i} band={band}/>
                         )

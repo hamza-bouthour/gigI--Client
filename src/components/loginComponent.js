@@ -61,7 +61,7 @@ const Login = props => {
                             />
                         </FormGroup>
                         <FormGroup style={{marginLeft: 20}}>
-                            <Label>
+                            <Label htmlFor="sound">
                                 <Input type="checkbox" name="sound" 
                                     checked={saveCre}
                                     onChange={(e) => setCred(e.target.checked)}  

@@ -75,12 +75,12 @@ const Home = props => {
                                 <div className="band-box-bottom">
                                     <p>Photos by Lanty</p>
                                     <div className="band-box-links">
-                                        <Link className="band-box-link">
+                                        <a className="band-box-link" href="https://unsplash.com/@photos_by_lanty" target="_blank" rel="noreferrer">
                                             Check Lanty
-                                        </Link>
-                                        <Link className="band-box-link">
+                                        </a>
+                                        <a className="band-box-link" disabled href="/home">
                                             Browse photographers
-                                        </Link>
+                                        </a>
                                     </div>
                                 </div>
                                 <img  style={{borderRadius: "5px"}} className="artist-secondary-photo-top" src="https://i.postimg.cc/zBK8gvCc/shardayyy-photography-f-Jzm-Pe-a0e-U-unsplash.jpg" alt="cover-header"/>
@@ -103,12 +103,12 @@ const Home = props => {
                                 <div className="band-box-bottom">
                                     <p>Folk music</p>
                                     <div className="band-box-links">
-                                        <Link className="band-box-link">
+                                        <a className="band-box-link" href="/bands">
                                             Check Land-free
-                                        </Link>
-                                        <Link className="band-box-link">
+                                        </a>
+                                        <a className="band-box-link" href="/bands">
                                             Browse bands
-                                        </Link>
+                                        </a>
                                     </div>
                                 </div>
                                 <img  style={{borderRadius: "5px"}} className="artist-secondary-photo-top" src="https://i.postimg.cc/xTy8Zxb4/band3.jpg" alt="cover-header"/>

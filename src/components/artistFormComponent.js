@@ -28,7 +28,7 @@ const ArtistForm = props => {
     const [country, setCountry] = useState('');
     const [city, setCity] = useState('');
     const [zipcode, setZipcode] = useState(0);
-    const [sound, setSound] = useState(true);
+    // const [sound, setSound] = useState(true);
     const [bandMembers, setBandMembers] = useState([0]);
     const [displayForm, setFormDisplay] = useState('part1');
     const [cost, setCost] = useState(0);
@@ -76,7 +76,7 @@ const ArtistForm = props => {
             country,
             city,
             zipcode,
-            sound,
+            sound: true,
             image: '',
             cost,
             eventype
@@ -262,11 +262,10 @@ async function handleClickform2(e) {
                             </Col>
                             <Col className="row">
                                 <button
-                                    style={{display: !displayBtn ? "none" : "block"}}
                                     className="col-2 offset-5 btn-form-navigation mr-2 btn-back"
                                     style={{display: displayForm === 'part3' ? "block" : "none"}}
                                     onClick={(e) => {e.preventDefault() ;setFormDisplay('part2')}} 
-                                >BacK</button> 
+                                >Back</button> 
                                 <button
                                     
                                     className="col-2  btn-form-navigation btn-next"

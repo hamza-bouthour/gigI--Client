@@ -16,7 +16,7 @@ function UploadForm(props) {
 
     const [file, setFile] = useState(null);
     const history = useHistory();
-   function onFormSubmit(e){
+  async function onFormSubmit(e){
 
     console.log(props.bands.bandReducer.bandId)
         e.preventDefault();
@@ -28,12 +28,14 @@ function UploadForm(props) {
                 'content-type': 'multipart/form-data'
             }
         };
-        axios.post(urls.uploadUrl, formData, config)
+        await axios.post(urls.uploadUrl, formData, config)
             .then(response => console.log(response))
-            .then(response => history.push('/bands'))
             .catch((error) => {
                 new Error(error.message);
         });
+        setTimeout(() => {
+            history.push('/bands')
+        }, 2000)
     }
         return (
             <div>

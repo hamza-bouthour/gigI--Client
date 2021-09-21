@@ -3,6 +3,7 @@ import { Form, FormGroup, Label, Input, Col, Row } from 'reactstrap';
 import urls from '../config';
 import { connect } from 'react-redux';
 import { addNewBand, addNewUser } from '../redux/ActionCreators';
+import { Link } from 'react-router-dom';
 
 
 
@@ -282,7 +283,10 @@ async function handleClickform2(e) {
                                         style={{display: displayForm === 'part4' ? "block" : "none"}}
                                         onClick={() => setFormDisplay('part3')} 
                                     >Back</button> 
-                                        <button type="button" style={{background: "none", border: "none", color: "aliceblue"}}><button type="submit" class="btn btn-primary">Submit</button></button>
+                                        <Link to="/home">
+                                             <input type="submit" style={{background: "none", border: "none", color: "aliceblue"}} 
+                                             />
+                                        </Link>       
                                 </div>
                             </form>
                         </Row>

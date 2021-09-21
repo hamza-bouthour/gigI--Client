@@ -7,6 +7,7 @@ import { Switch, Route, Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';
 import ArtistForm from './artistFormComponent';
 import Test from './testComponent';
+import UploadForm from './uploadForm';
 
 const mapStateToProps = (bands, user) =>{
     return {
@@ -31,6 +32,7 @@ const Main = (props) => {
                 <Route exact path='/bands' component={BandList} />
                 <Route path='/bands/:bandId' component={BandInfo} />
                 <Route exact path="/artists" component={ArtistForm} />
+                <Route exact path='/upload' component={UploadForm}/>
                 <Route  path="/login"  render={() => props.bands.user.loggedIn ? <Redirect to="/home" /> : <Login />} />
                 <Redirect to='/home'/> 
            </Switch>

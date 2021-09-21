@@ -63,10 +63,16 @@ export const fetchQueryBands = (data) => dispatch => {
     });
 }
 
-export const addNewBand = data => {
+export const addNewBand = id => {
     return {
         type: ActionTypes.ADD_NEW_BAND,
-        payload: data
+        payload: id
+    }
+}
+export const addNewID = id => {
+    return {
+        type: ActionTypes.ADD_NEW_ID,
+        payload: id
     }
 }
 export const addNewUser = data => {
@@ -133,7 +139,6 @@ export const loginUser = data  => dispatch => {
             let password = response.data[0].password;
             localStorage.setItem('email', email);
             localStorage.setItem('password', password);
-            // window.location.reload();
         }
         else {
             dispatch(subscribeUser('no data'))

@@ -7,6 +7,7 @@ export const ADD_BAND_MEMBERS = 'ADD_BAND-MEMBERS';
 
 export const ADD_NEW_BAND = 'ADD_NEW_BAND';
 export const ADD_NEW_USER = 'ADD_NEW_USER';
+export const ADD_NEW_ID = 'ADD_NEW_ID';
 export const DELETE_BAND = 'DELETE_BAND';
 export const SEARCH_BAND = 'SEARCH_BAND';
 

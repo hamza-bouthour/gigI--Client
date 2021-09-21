@@ -44,13 +44,10 @@ class BandList extends Component {
         this.state = {
             bands: []
           
-        }
-
-        
+        }   
     }
 
     componentDidMount() {
-        console.log('sad')
         if (!this.props.bands.bands.isSearching) {
             this.props.bandsLoading()
                  fetch(urls.bandsUrl, {
@@ -65,11 +62,9 @@ class BandList extends Component {
                     new Error(error.message)
             });
              
-        }
-         else {
-             this.setState({bands: this.props.bands.bands.searchBands})
-            } 
-
+        } else {
+            this.setState({bands: this.props.bands.bands.searchBands})
+           }       
     }
 
     render() {

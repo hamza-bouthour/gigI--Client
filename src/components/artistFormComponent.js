@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { Form, FormGroup, Label, Input, Col, Row } from 'reactstrap';
 import urls from '../config';
 import { connect } from 'react-redux';
-import { addNewBand, addNewUser } from '../redux/ActionCreators';
+import { addNewID, addNewUser } from '../redux/ActionCreators';
 import { Link } from 'react-router-dom';
 
 
 
 const mapDispatchToProps = {
-    addNewBand,
+    addNewID,
     addNewUser
 }
 const mapStateToProps = (bands) =>{
@@ -36,6 +36,7 @@ const ArtistForm = props => {
     const [membersInstrument, setMembersInstruments] = useState([]);
     const [membersName, setMembersName] = useState([]);
     const [bandId, setBandId] = useState('');
+    const [displayBtn, setDisplayBtn] = useState(false);
     
 
     const addMember = (number) => {
@@ -57,7 +58,7 @@ const ArtistForm = props => {
             }
             })
             .then(response => response.json())
-            .then(response => setBandId(response.data[0].bandId))
+            .then(response => {setBandId(response.data[0].bandId); props.addNewID(response.data[0].bandId)})
             .catch((error) => {
             console.error('Error:', error);
         });
@@ -119,8 +120,8 @@ async function handleClickform2(e) {
                         <Row form style={{display: displayForm === 'part1' ? "flex" : "none"}}>
                             <Col md={6}>
                                 <FormGroup>
-                                    <Label htmlFor="emailIn">Email</Label>
-                                    <Input type="text" name="email" id="emailIn" placeholder="band@gigit.com"
+                                    <Label className="form-label" htmlFor="emailIn">Email</Label>
+                                    <Input className="form-input" type="text" name="email" id="emailIn" placeholder="band@gigit.com"
                                         onChange={(e) => setEmail(e.target.value)}
                                     />
                                 </FormGroup>
@@ -128,22 +129,22 @@ async function handleClickform2(e) {
                             </Col>
                             <Col md={6}>
                                 <FormGroup>
-                                    <Label htmlFor="pswIn">Password</Label>
-                                    <Input type="text" name="pswIn" id="pswIn" placeholder="at least 5 caracters" 
+                                    <Label className="form-label" htmlFor="pswIn">Password</Label>
+                                    <Input className="form-input" type="text" name="pswIn" id="pswIn" placeholder="at least 5 caracters" 
                                         onChange={(e) => setPassword(e.target.value)}
                                     />
                                 </FormGroup>
                             </Col>
                         </Row>
                             <FormGroup style={{display: displayForm === 'part1' ? "block" : "none"}}>
-                                <Label htmlFor="nameIn">Name</Label>
-                                <Input type="text" name="name" id="nameIn" placeholder="at least 5 caracters" 
+                                <Label className="form-label" htmlFor="nameIn">Name</Label>
+                                <Input className="form-input" type="text" name="name" id="nameIn" placeholder="at least 5 caracters" 
                                     onChange={(e) => setName(e.target.value)}
                                 />
                             </FormGroup>
                             <FormGroup style={{display: displayForm === 'part1' ? "block" : "none"}}>
-                                    <Label htmlFor="eventRecruiterIn">Type of music</Label>
-                                    <Input type="select" name="event" id="eventRecruiterIn" 
+                                    <Label className="form-label" htmlFor="eventRecruiterIn">Type of music</Label>
+                                    <Input className="form-input" type="select" name="event" id="eventRecruiterIn" 
                                         onChange={(e) => setStyle(e.target.value)}
                                     >
                                     <option value="Rock">Rock</option>
@@ -156,20 +157,20 @@ async function handleClickform2(e) {
                                     </Input>
                                 </FormGroup>
                                 <FormGroup style={{display: displayForm === 'part1' ? "block" : "none"}}>
-                                    <Label htmlFor="eventIn">Event type</Label>
-                                    <Input type="text" name="event" id="eventIn" placeholder="Lounges, birthdays..." 
+                                    <Label className="form-label" htmlFor="eventIn">Event type</Label>
+                                    <Input className="form-input" type="text" name="event" id="eventIn" placeholder="Lounges, birthdays..." 
                                         onChange={(e) => setEventype(e.target.value)}
                                     />
                                 </FormGroup>
                                 <FormGroup style={{display: displayForm === 'part1' ? "block" : "none"}}>
-                                    <Label htmlFor="costIn">Cost</Label>
-                                    <Input type="number" name="cost" id="costIn" placeholder="$" 
+                                    <Label className="form-label" htmlFor="costIn">Cost</Label>
+                                    <Input className="form-input" type="number" name="cost" id="costIn" placeholder="$" 
                                         onChange={(e) => setCost(e.target.value)}
                                     />
                                 </FormGroup>
                                 <FormGroup style={{display: displayForm === 'part1' ? "block" : "none"}}>
-                                    <Label htmlFor="descIn" >Description</Label>
-                                    <Input type="textarea" name="style" id="descIn" placeholder="An introduction to your band" 
+                                    <Label className="form-label" htmlFor="descIn" >Description</Label>
+                                    <Input className="form-input" type="textarea" name="style" id="descIn" placeholder="An introduction to your band" 
                                         onChange={(e) => setDescription(e.target.value)}
                                     />
                                 </FormGroup>
@@ -185,24 +186,24 @@ async function handleClickform2(e) {
                             <Row style={{display: displayForm === "part2" ? "flex" : "none"}}>
                             <Col md={4}>
                                 <FormGroup>
-                                    <Label htmlFor="countryIn" >Country</Label>
-                                    <Input type="text" name="style" id="countryIn" placeholder="USA" 
+                                    <Label className="form-label" htmlFor="countryIn" >Country</Label>
+                                    <Input className="form-input" type="text" name="style" id="countryIn" placeholder="USA" 
                                         onChange={(e) => setCountry(e.target.value)}
                                     />
                                 </FormGroup>
                             </Col>
                             <Col md={4}>
                                 <FormGroup>
-                                    <Label htmlFor="cityIn" >City</Label>
-                                    <Input type="text" name="style" id="cityIn" placeholder="San Fransisco" 
+                                    <Label className="form-label" htmlFor="cityIn" >City</Label>
+                                    <Input className="form-input" type="text" name="style" id="cityIn" placeholder="San Fransisco" 
                                         onChange={(e) => setCity(e.target.value)}
                                     />
                                 </FormGroup>
                             </Col>
                             <Col md={2}>
                                 <FormGroup>
-                                    <Label htmlFor="zipcodeIn">Zip-code</Label>
-                                    <Input type="number" name="zipCode" id="zipcodeIn" placeholder="95376.." 
+                                    <Label className="form-label" htmlFor="zipcodeIn">Zip-code</Label>
+                                    <Input className="form-input" type="number" name="zipCode" id="zipcodeIn" placeholder="95376.." 
                                         onChange={(e) => setZipcode(e.target.value)}
                                     />
                                 </FormGroup>
@@ -217,78 +218,68 @@ async function handleClickform2(e) {
                                 <button
                                     className="col-2  btn-form-navigation btn-next"
                                     style={{display: displayForm === 'part2' ? "block" : "none"}}
-                                    onClick={(e) => { handleClickForm1(e); setFormDisplay('part3') }}
+                                    onClick={(e) => { handleClickForm1(e); setFormDisplay('part3');}}
                                 >Next</button>
                             </Row>
-                        <Row style={{display: displayForm === "part3" ? "flex" : "none"}}>
-                            <Col md={6}>
+                        <Row style={{display: displayForm === "part3" ? "block" : "none"}}>
+                            <Col md={8}>
                                 <FormGroup>
-                                    <Label htmlFor="lineupIn">Line-up</Label>
-                                    <Input type="number" name="lineUp" id="lineupIn" placeholder="how many band memebers" 
+                                    <Label className="form-label" htmlFor="lineupIn">Line-up</Label>
+                                    <Input className="form-input" type="number" name="lineUp" id="lineupIn" placeholder="how many band memebers" 
                                         onChange={(e) =>{ setLineup(e.target.value); setBandMembers(addMember(e.target.value)); console.log(addMember(e.target.value))  }}
                                     />
                                 </FormGroup>             
                             </Col>
-                            <Col md={6}>
+                            {/* <Col md={6}>
                                 <FormGroup style={{marginLeft: 20}}> 
                                     <Label></Label>
-                                        <Input type="checkbox" name="sound" checked={sound}
+                                        <Input className="form-input" type="checkbox" name="sound" checked={sound}
                                             onChange={(e) => setSound(e.target.checked)}
                                         />          
                                 </FormGroup>             
-                            </Col>
-                            <Col>
+                            </Col> */}
+                            <Col col={6}>
                                 <div className="container">
                                     {bandMembers.map(b => {
                                     return (
-                                            <Row key={b}>
-                                                
-                                                    <FormGroup className="col-7"> 
-                                                        <Input type="text" name="city" id="exampleCity" placeholder="Name"
-                                                            onBlur={(e) => setMembersName(prevState => [...membersName, e.target.value]) }    
-                                                        />
-                                                    </FormGroup>
-                                                
-                                                   
-                                                    <FormGroup className="col-5">
-                                                        <Input type="text" name="state" id="exampleState" placeholder="Instrument"
-                                                            onBlur={(e) => setMembersInstruments(prevState => [...membersInstrument, e.target.value])  }
-                                                        />
-                                                    </FormGroup>    
-                                            </Row>
+                                        <Row key={b}>
+                                            <FormGroup className="col-7"> 
+                                                <Input className="form-input" type="text" name="city" id="exampleCity" placeholder="Name"
+                                                    onBlur={(e) => setMembersName(prevState => [...membersName, e.target.value]) }    
+                                                />
+                                            </FormGroup>
+                                        
+                                            
+                                            <FormGroup className="col-5">
+                                                <Input className="form-input" type="text" name="state" id="exampleState" placeholder="Instrument"
+                                                    onBlur={(e) => setMembersInstruments(prevState => [...membersInstrument, e.target.value])  }
+                                                />
+                                            </FormGroup>    
+                                        </Row>
                                         )
                                     })}
                                 </div>
                             </Col>
+                            <Col className="row">
+                                <button
+                                    style={{display: !displayBtn ? "none" : "block"}}
+                                    className="col-2 offset-5 btn-form-navigation mr-2 btn-back"
+                                    style={{display: displayForm === 'part3' ? "block" : "none"}}
+                                    onClick={(e) => {e.preventDefault() ;setFormDisplay('part2')}} 
+                                >BacK</button> 
+                                <button
+                                    
+                                    className="col-2  btn-form-navigation btn-next"
+                                    style={{display: displayBtn === false ? "block" : "none"}}
+                                    onClick={(e) => {handleClickform2(e);  setDisplayBtn(true)}}  
+                                >
+                                    Confirm
+                                </button>      
+                                    <Link to="/upload" className="col-2  btn-form-navigation btn-next ml-2" disabled style={{display: displayBtn === false ? "none" : "block"}}
+                                    >Upload photo</Link>
+                            </Col>
                         </Row>
                         <Row>
-                            <button
-                                className="col-2 offset-7 btn-form-navigation mr-2 btn-back"
-                                style={{display: displayForm === 'part3' ? "block" : "none"}}
-                                onClick={() => setFormDisplay('part2')} 
-                            >BacK</button> 
-                            <button
-                                className="col-2  btn-form-navigation btn-next"
-                                style={{display: displayForm === 'part3' ? "block" : "none"}}
-                                onClick={(e) => {handleClickform2(e); setFormDisplay('part4') }}  
-                            >Next</button>      
-                        </Row>
-                        <Row style={{display: displayForm === 'part4' ? "flex" : "none", justifyContent: 'center'}}>
-                            <form className="container" enctype="multipart/form-data" action="http://192.168.1.82:3001/upload" method="post">
-                                <div className="row">
-                                    <input type="file" name="image" className="col-6"/>
-                                    <input value={bandId} type="hidden" name="inputId" readOnly/>
-                                    <button
-                                        className="col-2 btn-form-navigation mr-2 btn-back"
-                                        style={{display: displayForm === 'part4' ? "block" : "none"}}
-                                        onClick={() => setFormDisplay('part3')} 
-                                    >Back</button> 
-                                        <Link to="/home">
-                                             <input type="submit" style={{background: "none", border: "none", color: "aliceblue"}} 
-                                             />
-                                        </Link>       
-                                </div>
-                            </form>
                         </Row>
                     </Form>
                 </div>

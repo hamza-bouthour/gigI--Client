@@ -17,6 +17,8 @@ function UploadForm(props) {
     const [file, setFile] = useState(null);
     const history = useHistory();
    function onFormSubmit(e){
+
+    console.log(props.bands.bandReducer.bandId)
         e.preventDefault();
         const formData = new FormData();
         formData.append('image', file);
@@ -27,6 +29,7 @@ function UploadForm(props) {
             }
         };
         axios.post(urls.uploadUrl, formData, config)
+            .then(response => console.log(response))
             .then(response => history.push('/bands'))
             .catch((error) => {
                 new Error(error.message);

@@ -19,14 +19,21 @@ class Login extends Component {
     constructor(props) {
         super();
         this.state = {
-            email: '',
-            password: ''
+            email: 'asd',
+            password: 'asdf'
         }
-
-        
     }
   
-
+    handleClick(e) {
+        e.preventDefault();
+          const data ={
+              type: 'typed',
+              email: this.state.email,
+              password: this.state.password  
+          }
+          this.props.loginUser(data)
+        console.log(this.state.email, this.state.password)
+      }
    
 
     componentDidMount() {
@@ -44,17 +51,7 @@ class Login extends Component {
     
 
     render() {
-
-        function handleClick(e) {
-            e.preventDefault();
-              const data ={
-                  type: 'typed',
-                  email: this.state.email,
-                  password: this.state.password  
-              }
-              this.props.loginUser(data)
-          }
-
+        
         if(!this.props.bands.user.loggedIn) {
                     return (
                         <div className=" login-form-container">
@@ -80,7 +77,7 @@ class Login extends Component {
                                         </Label>
                                     </FormGroup> */}
                                     <Button color="info" 
-                                        onClick={(e) =>  handleClick(e)}
+                                        onClick={(e) =>  this.handleClick(e)}
                                     >Submit</Button>
                                     <Button color="secondary" className="ml-1">cancel</Button>
                                 </Form>

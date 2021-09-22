@@ -1,5 +1,7 @@
+URL: https://gigitv2.netlify.app/
+email: admin@admin.com
+password: admin
 
-![image](https://user-images.githubusercontent.com/61101578/124663128-8be0f500-de5e-11eb-98be-451b1d8c1d6b.PNG)
 
 GIGIT is a web solution for users to get an easier access to local artists contact information.
 Artists can create an account an be visible in users searches.
@@ -7,7 +9,7 @@ users can search for bands by ZipCode, name or ZipCode.
 Once the band is retrieved, user can request a booking at a certain date and wait for confirmation.
 This is a non complete version of the project.
 More features will be added soon.
-server side: https://github.com/hamza-bouthour/gigIt-Server
+
 
 Built with React JS, Redux, Bootstrap, SASS, Express and MySQL
 
